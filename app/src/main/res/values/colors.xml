@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9A222C</color>
+    <color name="colorPrimaryDark">#9A222C</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <!--EasyNavigationBar-->
+    <color name="NavigationBg">#2C2C2C</color>
+    <color name="normalTextColor">#5C5D62</color>
+    <color name="selectTextColor">#9A222C</color>
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">TeachingBlog</string>
+
+    <!--title-->
+    <string-array name="navigation_title">
+        <item>首页</item>
+        <item>分类</item>
+        <item>视频</item>
+    </string-array>
+
+    <!--title-->
+    <string-array name="indicator_title">
+        <item>HTML</item>
+        <item>CSS</item>
+        <item>JS</item>
+        <item>Vue</item>
+        <item>Nodejs</item>
+    </string-array>
+
+</resources>
