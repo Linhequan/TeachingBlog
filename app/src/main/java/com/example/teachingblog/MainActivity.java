@@ -46,6 +46,7 @@ public class MainActivity extends BaseActivity {
                 .selectTextColor(this.getResources().getColor(R.color.selectTextColor))
                 .navigationBackground(this.getResources().getColor(R.color.NavigationBg))
                 .navigationHeight(NAVIGATION_HEIGHT)
+                .lineColor(this.getResources().getColor(R.color.lineBg))
                 .canScroll(true)
                 .fragmentManager(getSupportFragmentManager())
                 .build();

@@ -6,6 +6,12 @@
 
     <!--EasyNavigationBar-->
     <color name="NavigationBg">#2C2C2C</color>
+    <color name="lineBg">#1E1E1E</color>
     <color name="normalTextColor">#5C5D62</color>
     <color name="selectTextColor">#9A222C</color>
+    
+    <!--article item-->
+    <color name="homeBg">#1E1E1E</color>
+    <color name="article_title">#969696</color>
+    <color name="article_icon">#5C5D62</color>
 </resources>

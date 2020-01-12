@@ -4,9 +4,9 @@ import com.example.teachingblog.base.IBasePresenter;
 
 public interface IHomePresenter extends IBasePresenter<IHomeViewCallback> {
     /**
-     * 获取推荐内容
+     * 获取首页推荐文章
      */
-    void getRecommendList();
+    void getHomeRecommendArticle();
 
     /**
      * 下拉刷新更多内容
