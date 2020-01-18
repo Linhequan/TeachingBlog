@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.teachingblog.R;
@@ -15,20 +16,21 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.InnerHolder> {
+public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.InnerHolder> {
 
-    private static final String TAG = "RecommendListAdapter";
+    private static final String TAG = "ArticleListAdapter";
     private List<Article> mDatas = new ArrayList<>();
+    private OnArticleItemClickListener mItemClickListener = null;
 
     @Override
     public InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //这里是加载View
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
         return new InnerHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(InnerHolder holder, int position) {
+    public void onBindViewHolder(InnerHolder holder, final int position) {
         //这里是设置数据
         View itemView = holder.itemView;
         //文章标题
@@ -39,12 +41,15 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         TextView articleTypeTv = itemView.findViewById(R.id.article_type_tv);
         //上传时间
         TextView articleAddTimeTv = itemView.findViewById(R.id.article_add_time_tv);
+        //文章图标
+        ImageView articleCoverImg = itemView.findViewById(R.id.article_cover);
 
         //设置数据
         Article article = mDatas.get(position);
         articleTitleTv.setText(article.getTitle());
         articleDesTv.setText(article.getBody());
         articleTypeTv.setText(article.getType());
+        articleCoverImg.setImageResource((int) article.getXBannerUrl());
 
         String addTimeText = null;
         try {
@@ -55,6 +60,16 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         if (addTimeText != null) {
             articleAddTimeTv.setText(addTimeText);
         }
+
+        //设置Item的点击事件
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener != null) {
+                    mItemClickListener.onItemClick(mDatas.get(position));
+                }
+            }
+        });
 
     }
 
@@ -77,5 +92,13 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
         public InnerHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public void setOnArticleItemClickListener(OnArticleItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
+
+    public interface OnArticleItemClickListener {
+        void onItemClick(Article article);
     }
 }

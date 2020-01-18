@@ -14,4 +14,12 @@
     <color name="homeBg">#1E1E1E</color>
     <color name="article_title">#969696</color>
     <color name="article_icon">#5C5D62</color>
+
+    <!--UiLoader-->
+    <color name="uiLoaderTextColor">#969696</color>
+
+    <!--Banner-->
+    <color name="tipTextColor">#969696</color>
+    <color name="pointNormalColor">#5C5D62</color>
+    <color name="pointSelectColor">#9A222C</color>
 </resources>

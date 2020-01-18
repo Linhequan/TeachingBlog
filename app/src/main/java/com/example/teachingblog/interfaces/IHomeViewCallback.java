@@ -13,7 +13,7 @@ public interface IHomeViewCallback {
      *
      * @param result
      */
-    void onRecommendListLoaded(List<Article> result);
+    void onArticleListLoaded(List<Article> result);
 
     /**
      * 网络错误

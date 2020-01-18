@@ -88,9 +88,10 @@ public class HomePresenter implements IHomePresenter {
                     callback.onEmpty();
                 }
             } else {
+
                 for (IHomeViewCallback callback : mCallbacks) {
                     //回调UI数据
-                    callback.onRecommendListLoaded(articleList);
+                    callback.onArticleListLoaded(articleList);
                 }
             }
         }
