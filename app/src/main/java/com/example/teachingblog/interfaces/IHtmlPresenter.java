@@ -2,11 +2,12 @@ package com.example.teachingblog.interfaces;
 
 import com.example.teachingblog.base.IBasePresenter;
 
-public interface IHomePresenter extends IBasePresenter<IHomeViewCallback> {
+public interface IHtmlPresenter extends IBasePresenter<IHtmlViewCallback> {
+
     /**
-     * 获取首页推荐文章
+     * 获取Html类别的文章
      */
-    void getHomeArticle();
+    void getHtmlArticle();
 
     /**
      * 下拉刷新更多内容

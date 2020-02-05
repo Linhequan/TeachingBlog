@@ -16,10 +16,17 @@
     <color name="article_icon">#5C5D62</color>
 
     <!--UiLoader-->
+    <color name="UiLoaderBg">#1E1E1E</color>
     <color name="uiLoaderTextColor">#969696</color>
 
     <!--Banner-->
     <color name="tipTextColor">#969696</color>
     <color name="pointNormalColor">#5C5D62</color>
     <color name="pointSelectColor">#9A222C</color>
+    
+    <!--detail-->
+    <color name="detailBg">#1E1E1E</color>
+    <color name="detail_title">#969696</color>
+    <color name="detail_author">#5C5D62</color>
+    <color name="detail_addTime">#5C5D62</color>
 </resources>

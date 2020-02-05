@@ -1,7 +1,7 @@
 package com.example.teachingblog.presenters;
 
-import com.example.teachingblog.interfaces.IHomePresenter;
-import com.example.teachingblog.interfaces.IHomeViewCallback;
+import com.example.teachingblog.interfaces.IHtmlPresenter;
+import com.example.teachingblog.interfaces.IHtmlViewCallback;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.network.RequestCenter;
 import com.example.teachingblog.network.exception.OkHttpException;
@@ -11,26 +11,26 @@ import com.example.teachingblog.utils.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePresenter implements IHomePresenter {
+public class HtmlPresenter implements IHtmlPresenter {
 
-    private static final String TAG = "HomePresenter";
-    private List<IHomeViewCallback> mCallbacks = new ArrayList<>();
+    private static final String TAG = "HtmlPresenter";
+    private List<IHtmlViewCallback> mCallbacks = new ArrayList<>();
 
-    private HomePresenter() {
+    private HtmlPresenter() {
     }
 
-    private static HomePresenter sInstance = null;
+    private static HtmlPresenter sInstance = null;
 
     /**
      * 获取单例对象
      *
      * @return
      */
-    public static HomePresenter getInstance() {
+    public static HtmlPresenter getInstance() {
         if (sInstance == null) {
-            synchronized (HomePresenter.class) {
+            synchronized (HtmlPresenter.class) {
                 if (sInstance == null) {
-                    sInstance = new HomePresenter();
+                    sInstance = new HtmlPresenter();
                 }
             }
         }
@@ -38,20 +38,18 @@ public class HomePresenter implements IHomePresenter {
     }
 
     /**
-     * 获取首页推荐文章
+     * 获取分类为html的所有文章
      */
     @Override
-    public void getHomeArticle() {
+    public void getHtmlArticle() {
         //通知UI更新正在加载
         updateLoading();
-        //获取首页推荐文章
-        RequestCenter.getHomeArticle(new DisposeDataListener() {
+        RequestCenter.getHtmlArticle(new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
-                LogUtil.d(TAG, "thread name ---->" + Thread.currentThread().getName());
                 if (responseObj != null) {
                     List<Article> articleList = (List<Article>) responseObj;
-                    LogUtil.d(TAG, "length --- > " + articleList.size());
+                    LogUtil.d(TAG, "length ===== " + articleList.size());
                     handlerRecommendResult(articleList);
                 }
             }
@@ -69,14 +67,8 @@ public class HomePresenter implements IHomePresenter {
 
     private void handlerError() {
         //通知UI更新网络出错
-        for (IHomeViewCallback callback : mCallbacks) {
+        for (IHtmlViewCallback callback : mCallbacks) {
             callback.onNetworkError();
-        }
-    }
-
-    private void updateLoading() {
-        for (IHomeViewCallback callback : mCallbacks) {
-            callback.onLoading();
         }
     }
 
@@ -84,16 +76,22 @@ public class HomePresenter implements IHomePresenter {
         //通知UI更新
         if (articleList != null) {
             if (articleList.size() == 0) {
-                for (IHomeViewCallback callback : mCallbacks) {
+                for (IHtmlViewCallback callback : mCallbacks) {
                     //回调UI数据为空
                     callback.onEmpty();
                 }
             } else {
-                for (IHomeViewCallback callback : mCallbacks) {
+                for (IHtmlViewCallback callback : mCallbacks) {
                     //回调UI数据
                     callback.onArticleListLoaded(articleList);
                 }
             }
+        }
+    }
+
+    private void updateLoading() {
+        for (IHtmlViewCallback callback : mCallbacks) {
+            callback.onLoading();
         }
     }
 
@@ -108,17 +106,17 @@ public class HomePresenter implements IHomePresenter {
     }
 
     @Override
-    public void registerViewCallback(IHomeViewCallback iHomeViewCallback) {
+    public void registerViewCallback(IHtmlViewCallback iHtmlViewCallback) {
         //防止重复加入
-        if (mCallbacks != null && !mCallbacks.contains(iHomeViewCallback)) {
-            mCallbacks.add(iHomeViewCallback);
+        if (mCallbacks != null && !mCallbacks.contains(iHtmlViewCallback)) {
+            mCallbacks.add(iHtmlViewCallback);
         }
     }
 
     @Override
-    public void unRegisterViewCallback(IHomeViewCallback iHomeViewCallback) {
+    public void unRegisterViewCallback(IHtmlViewCallback iHtmlViewCallback) {
         if (mCallbacks != null) {
-            mCallbacks.remove(iHomeViewCallback);
+            mCallbacks.remove(iHtmlViewCallback);
         }
     }
 }

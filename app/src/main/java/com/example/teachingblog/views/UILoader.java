@@ -55,6 +55,8 @@ public abstract class UILoader extends FrameLayout {
      * 初始化UI
      */
     private void init() {
+        //设置背景颜色
+        this.setBackground(this.getResources().getDrawable(R.color.UiLoaderBg));
         switchUIByCurrentStatus();
     }
 

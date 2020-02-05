@@ -46,6 +46,12 @@ public class DisposeDataHandle {
         this.mClass = clazz;
     }
 
+    /**
+     * 下载数据
+     *
+     * @param listener
+     * @param source   下载地址
+     */
     public DisposeDataHandle(DisposeDataListener listener, String source) {
         this.mListener = listener;
         this.mSource = source;
