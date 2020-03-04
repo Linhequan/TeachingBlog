@@ -7,11 +7,10 @@ import android.view.ViewGroup;
 import com.example.teachingblog.R;
 import com.example.teachingblog.base.BaseFragment;
 
-public class CssFragment extends BaseFragment {
+public class VideoNodeFragment extends BaseFragment {
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
-        // TODO: 2020/2/5 0005 Css分类的实现
-        return layoutInflater.inflate(R.layout.fragment_css, container, false);
+        return layoutInflater.inflate(R.layout.fragment_node_video, container, false);
     }
 }

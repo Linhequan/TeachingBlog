@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.view.View;
 
 import com.example.teachingblog.R;
-import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.utils.ScaleTransitionPagerTitleView;
 
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -14,15 +13,13 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
-public class IndicatorAdapter extends CommonNavigatorAdapter {
-
-    private static final String TAG = "IndicatorAdapter";
+public class ArticleIndicatorAdapter extends CommonNavigatorAdapter {
 
     private final String[] mTitles;
     private OnIndicatorTapClickListener mOnTapClickListener;
 
-    public IndicatorAdapter(Context context) {
-        mTitles = context.getResources().getStringArray(R.array.indicator_title);
+    public ArticleIndicatorAdapter(Context context) {
+        mTitles = context.getResources().getStringArray(R.array.article_indicator_title);
     }
 
     @Override

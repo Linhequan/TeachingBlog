@@ -4,10 +4,48 @@
     android:layout_height="match_parent"
     android:background="@color/detailBg">
 
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/titleBarBg">
+
+        <ImageView
+            android:id="@+id/title_bar_back_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/back" />
+
+        <ImageView
+            android:id="@+id/title_bar_more_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@mipmap/more" />
+
+        <TextView
+            android:id="@+id/title_bar_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@id/title_bar_more_iv"
+            android:layout_toRightOf="@id/title_bar_back_iv"
+            android:gravity="center"
+            android:textColor="@color/title_text_color"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/article_detail_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp" />
+        android:layout_below="@id/title_bar" />
 
 </RelativeLayout>

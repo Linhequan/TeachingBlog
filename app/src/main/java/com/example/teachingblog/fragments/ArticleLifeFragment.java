@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import com.example.teachingblog.R;
 import com.example.teachingblog.base.BaseFragment;
 
-public class NodeFragment extends BaseFragment {
+public class ArticleLifeFragment extends BaseFragment {
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
-        return layoutInflater.inflate(R.layout.fragment_node, container, false);
+        return layoutInflater.inflate(R.layout.fragment_life_article, container, false);
     }
 }

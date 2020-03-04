@@ -36,6 +36,7 @@ public class RequestCenter {
 
     }
 
+    //**************************************请求方式相关************************************************//
     //根据使用TypeToken进行解析发送get请求
     public static void getRequestByTypeToken(String url, DisposeDataListener listener, Type type) {
         CommonOkHttpClient.get(CommonRequest.
@@ -47,6 +48,7 @@ public class RequestCenter {
         CommonOkHttpClient.get(CommonRequest.createGetRequest(url), new DisposeDataHandle(listener));
     }
 
+    //**************************************请求文章相关************************************************//
     /**
      * 获取首页推荐文章
      *
@@ -77,4 +79,6 @@ public class RequestCenter {
         getRequestByTypeToken(HttpConstants.HTML_ARTICLE, listener, new TypeToken<List<Article>>() {
         }.getType());
     }
+
+    //**************************************请求视频相关************************************************//
 }

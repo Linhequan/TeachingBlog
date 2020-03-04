@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.teachingblog.base.BaseActivity;
 import com.example.teachingblog.interfaces.IArticleDetailViewCallback;
@@ -32,24 +34,53 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
     private WebView mWebView;
 
     private int mCurrentId = -1;
+    private ImageView mTitleBarBackIv;
+    private ImageView mTitleBarMoreIv;
+    private TextView mTitleBarTypeTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        // TODO: 2020/1/28 0028 详情页完成，webView样式有空就调整
+        // TODO: 2020/1/28 0028 titleBar完成，webView样式有空就调整
         //设置透明状态栏
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
+
         initView();
+        initListener();
 
         mArticleDetailPresenter = ArticleDetailPresenter.getInstance();
         mArticleDetailPresenter.registerViewCallback(this);
 
     }
 
+    private void initListener() {
+
+        //返回按钮被点击了
+        mTitleBarBackIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        //更多按钮被点击了
+        mTitleBarMoreIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: 2020/2/13 0013 更多pupWindow
+                Toast.makeText(DetailActivity.this, "点击更多", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
     private void initView() {
         mArticleDetailContainer = this.findViewById(R.id.article_detail_container);
+        mTitleBarBackIv = this.findViewById(R.id.title_bar_back_iv);
+        mTitleBarMoreIv = this.findViewById(R.id.title_bar_more_iv);
+        mTitleBarTypeTv = this.findViewById(R.id.title_bar_type_tv);
 
         if (mUiLoader == null) {
             mUiLoader = new UILoader(this) {
@@ -85,9 +116,15 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
             mArticleDetailPresenter.getArticleDetail(id);
         }
 
+        //先加载titleBar的文章类型
+        if (mTitleBarTypeTv != null) {
+            mTitleBarTypeTv.setText(article.getType());
+        }
+        //文章标题
         if (mDetailArticleTitle != null) {
             mDetailArticleTitle.setText(article.getTitle());
         }
+        //文章作者
         if (mDetailArticleAuthor != null) {
             mDetailArticleAuthor.setText(article.getAuthor());
         }

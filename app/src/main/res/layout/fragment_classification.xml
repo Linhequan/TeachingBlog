@@ -6,12 +6,12 @@
 
 
     <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/main_indicator"
+        android:id="@+id/article_main_indicator"
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/content_pager"
+        android:id="@+id/article_content_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

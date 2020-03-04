@@ -4,21 +4,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.teachingblog.utils.FragmentCreator;
+import com.example.teachingblog.utils.VideoFragmentCreator;
 
-public class MainContentAdapter extends FragmentPagerAdapter {
+public class VideoMainContentAdapter extends FragmentPagerAdapter {
 
-    public MainContentAdapter(FragmentManager fm) {
+    public VideoMainContentAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        return FragmentCreator.getFragment(position);
+        return VideoFragmentCreator.getFragment(position);
     }
 
     @Override
     public int getCount() {
-        return FragmentCreator.PAGE_COUNT;
+        return VideoFragmentCreator.PAGE_COUNT;
     }
 }

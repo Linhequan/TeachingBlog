@@ -7,10 +7,11 @@ import android.view.ViewGroup;
 import com.example.teachingblog.R;
 import com.example.teachingblog.base.BaseFragment;
 
-public class JavaScriptFragment extends BaseFragment {
+public class ArticleCssFragment extends BaseFragment {
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
-        return layoutInflater.inflate(R.layout.fragment_javascript, container, false);
+        // TODO: 2020/2/5 0005 Css分类的实现
+        return layoutInflater.inflate(R.layout.fragment_css_article, container, false);
     }
 }

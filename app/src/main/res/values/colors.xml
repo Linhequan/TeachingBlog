@@ -29,4 +29,12 @@
     <color name="detail_title">#969696</color>
     <color name="detail_author">#5C5D62</color>
     <color name="detail_addTime">#5C5D62</color>
+
+    <!--titleBar-->
+    <color name="title_text_color">#5C5D62</color>
+    <color name="titleBarBg">#1E1E1E</color>
+
+    <!--MagicIndicator-->
+    <color name="MagicIndicatorBg">#2C2C2C</color>
+
 </resources>

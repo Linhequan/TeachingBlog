@@ -8,10 +8,20 @@
         <item>视频</item>
     </string-array>
 
-    <!--title-->
-    <string-array name="indicator_title">
+    <!--article_title-->
+    <string-array name="article_indicator_title">
         <item>HTML</item>
         <item>CSS</item>
+        <item>JS</item>
+        <item>Vue</item>
+        <item>Nodejs</item>
+        <item>人生趣事</item>
+        <item>书籍推荐</item>
+    </string-array>
+
+    <!--video_title-->
+    <string-array name="video_indicator_title">
+        <item>HTML/CSS</item>
         <item>JS</item>
         <item>Vue</item>
         <item>Nodejs</item>

@@ -23,9 +23,9 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
 
-public class HtmlFragment extends BaseFragment implements IHtmlViewCallback, HtmlArticleListAdapter.OnArticleItemClickListener, UILoader.OnRetryClickListener {
+public class ArticleHtmlFragment extends BaseFragment implements IHtmlViewCallback, HtmlArticleListAdapter.OnArticleItemClickListener, UILoader.OnRetryClickListener {
 
-    private static final String TAG = "HtmlFragment";
+    private static final String TAG = "ArticleHtmlFragment";
     private HtmlPresenter mHtmlPresenter;
     private UILoader mUiLoader;
     private View mRootView;
@@ -62,7 +62,7 @@ public class HtmlFragment extends BaseFragment implements IHtmlViewCallback, Htm
     }
 
     private View createSuccessView(LayoutInflater layoutInflater, ViewGroup container) {
-        mRootView = layoutInflater.inflate(R.layout.fragment_html, container, false);
+        mRootView = layoutInflater.inflate(R.layout.fragment_html_article, container, false);
         //RecyclerView的使用步骤
         //1、找到控件
         mArticleList = mRootView.findViewById(R.id.html_article_list);
