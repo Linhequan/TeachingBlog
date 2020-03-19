@@ -3,13 +3,10 @@ package com.example.teachingblog.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 
 import com.example.teachingblog.R;
 import com.example.teachingblog.utils.ScaleTransitionPagerTitleView;
 
-import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;

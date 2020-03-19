@@ -4,7 +4,7 @@ import com.example.teachingblog.models.Article;
 
 import java.util.List;
 
-public interface IHtmlViewCallback {
+public interface IArticleHtmlViewCallback {
 
     /**
      * 获取Html文章

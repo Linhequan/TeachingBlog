@@ -2,11 +2,12 @@ package com.example.teachingblog.utils;
 
 import com.example.teachingblog.base.BaseFragment;
 import com.example.teachingblog.fragments.ArticleHtmlFragment;
-import com.example.teachingblog.fragments.ArticleBookRecommendFragment;
 import com.example.teachingblog.fragments.ArticleCssFragment;
 import com.example.teachingblog.fragments.ArticleJavaScriptFragment;
 import com.example.teachingblog.fragments.ArticleLifeFragment;
+import com.example.teachingblog.fragments.ArticleLinuxFragment;
 import com.example.teachingblog.fragments.ArticleNodeFragment;
+import com.example.teachingblog.fragments.ArticlePHPFragment;
 import com.example.teachingblog.fragments.ArticleVueFragment;
 
 import java.util.HashMap;
@@ -21,9 +22,10 @@ public class ArticleFragmentCreator {
     public final static int INDEX_JAVASCRIPT = 2;
     public final static int INDEX_VUE = 3;
     public final static int INDEX_NODE = 4;
-    public final static int INDEX_LIFE = 5;
-    public final static int INDEX_BOOK_RECOMMEND = 6;
-    public final static int PAGE_COUNT = 7;
+    public final static int INDEX_PHP = 5;
+    public final static int INDEX_LINUX = 6;
+    public final static int INDEX_LIFE = 7;
+    public final static int PAGE_COUNT = 8;
     private static Map<Integer, BaseFragment> sCache = new HashMap<>();
 
     public static BaseFragment getFragment(int index) {
@@ -48,11 +50,14 @@ public class ArticleFragmentCreator {
             case INDEX_NODE:
                 baseFragment = new ArticleNodeFragment();
                 break;
+            case INDEX_PHP:
+                baseFragment = new ArticlePHPFragment();
+                break;
+            case INDEX_LINUX:
+                baseFragment = new ArticleLinuxFragment();
+                break;
             case INDEX_LIFE:
                 baseFragment = new ArticleLifeFragment();
-                break;
-            case INDEX_BOOK_RECOMMEND:
-                baseFragment = new ArticleBookRecommendFragment();
                 break;
         }
         sCache.put(index, baseFragment);

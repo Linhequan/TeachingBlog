@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="85dp"
     android:background="@drawable/shape_item_bg">
 
-    <com.example.teachingblog.views.ArticleRoundRectImageView
-        android:id="@+id/article_cover"
-        android:layout_width="68dp"
-        android:layout_height="65dp"
+    <com.example.teachingblog.views.VideoRoundRectImageView
+        android:id="@+id/video_cover"
+        android:layout_width="120dp"
+        android:layout_height="75dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:scaleType="fitXY" />
@@ -16,35 +16,46 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/article_cover"
+        android:layout_toRightOf="@id/video_cover"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/article_title_tv"
+            android:id="@+id/video_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:ellipsize="end"
-            android:lines="1"
+            android:lines="2"
             android:text="拿破仑·希尔《成功学全书》"
-            android:textColor="@color/article_title"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/article_description_tv"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            android:layout_marginTop="3dp"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text="为你开启成功之路，给你指向未来！一起行动.."
-            android:textColor="#ff848484"
-            android:textSize="12sp" />
+            android:textColor="@color/video_title"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@mipmap/author" />
+
+            <TextView
+                android:id="@+id/video_author_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:text="林三心搬运工"
+                android:textColor="@color/video_icon"
+                android:textSize="9sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -59,12 +70,12 @@
                     android:src="@mipmap/label_normal" />
 
                 <TextView
-                    android:id="@+id/article_type_tv"
+                    android:id="@+id/video_type_tv"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="CSS"
-                    android:textColor="@color/article_icon"
+                    android:textColor="@color/video_icon"
                     android:textSize="9sp" />
 
             </LinearLayout>
@@ -82,12 +93,12 @@
                     android:src="@mipmap/time_normal" />
 
                 <TextView
-                    android:id="@+id/article_add_time_tv"
+                    android:id="@+id/video_add_time_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:text="2019-12-22 19:22:31"
-                    android:textColor="@color/article_icon"
+                    android:textColor="@color/video_icon"
                     android:textSize="9sp" />
 
             </LinearLayout>

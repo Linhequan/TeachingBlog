@@ -1,5 +1,6 @@
 package com.example.teachingblog.adapters;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.example.teachingblog.R;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.utils.LogUtil;
@@ -102,7 +105,7 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof HeaderViewHolder) {
             //Banner条目点击事件
             ((HeaderViewHolder) holder).mArticleBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
@@ -119,9 +122,7 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
                     Article article = (Article) model;
-                    int imgRes = (int) article.getXBannerUrl();
-                    ImageView imageView = (ImageView) view;
-                    imageView.setImageResource(imgRes);
+                    Glide.with(((HeaderViewHolder) holder).itemView.getContext()).load(article.getImg_path()).into((ImageView) view);
                 }
             });
             //刷新数据之后，需要重新设置是否支持自动轮播
@@ -133,7 +134,8 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((ContentViewHolder) holder).mArticleTitleTv.setText(article.getTitle());
             ((ContentViewHolder) holder).mArticleDesTv.setText(article.getBody());
             ((ContentViewHolder) holder).mArticleTypeTv.setText(article.getType());
-            ((ContentViewHolder) holder).mArticleCoverImg.setImageResource((int) article.getXBannerUrl());
+
+            Glide.with(((ContentViewHolder) holder).itemView.getContext()).load(article.getImg_path()).into(((ContentViewHolder) holder).mArticleCoverImg);
 
             String addTimeText = null;
             try {
@@ -163,6 +165,7 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return mHeaderCount + getContentItemCount();
     }
 
+    //设置适配器数据
     public void setData(List<Article> data) {
         //清除原来的数据
         mDatas.clear();
@@ -172,6 +175,7 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         notifyDataSetChanged();
     }
 
+    //设置轮播图数据
     public void setBannerData(List<Article> bannerData) {
         //清除原来的数据
         mBannerDatas.clear();

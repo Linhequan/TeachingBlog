@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Book Recommend"
+        android:text="Linux"
         android:textSize="20sp" />
 
 </RelativeLayout>

@@ -12,10 +12,10 @@ import com.example.teachingblog.DetailActivity;
 import com.example.teachingblog.R;
 import com.example.teachingblog.adapters.HtmlArticleListAdapter;
 import com.example.teachingblog.base.BaseFragment;
-import com.example.teachingblog.interfaces.IHtmlViewCallback;
+import com.example.teachingblog.interfaces.IArticleHtmlViewCallback;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.presenters.ArticleDetailPresenter;
-import com.example.teachingblog.presenters.HtmlPresenter;
+import com.example.teachingblog.presenters.ArticleHtmlPresenter;
 import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.views.UILoader;
 
@@ -23,10 +23,10 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
 
-public class ArticleHtmlFragment extends BaseFragment implements IHtmlViewCallback, HtmlArticleListAdapter.OnArticleItemClickListener, UILoader.OnRetryClickListener {
+public class ArticleHtmlFragment extends BaseFragment implements IArticleHtmlViewCallback, HtmlArticleListAdapter.OnArticleItemClickListener, UILoader.OnRetryClickListener {
 
     private static final String TAG = "ArticleHtmlFragment";
-    private HtmlPresenter mHtmlPresenter;
+    private ArticleHtmlPresenter mArticleHtmlPresenter;
     private UILoader mUiLoader;
     private View mRootView;
     private RecyclerView mArticleList;
@@ -44,11 +44,11 @@ public class ArticleHtmlFragment extends BaseFragment implements IHtmlViewCallba
         };
 
         //获取到逻辑层的对象
-        mHtmlPresenter = HtmlPresenter.getInstance();
+        mArticleHtmlPresenter = ArticleHtmlPresenter.getInstance();
         //先要设置通知接口的注册
-        mHtmlPresenter.registerViewCallback(this);
+        mArticleHtmlPresenter.registerViewCallback(this);
         //获取分类为html的所有文章
-        mHtmlPresenter.getHtmlArticle();
+        mArticleHtmlPresenter.getHtmlArticle();
 
         //与它的父类解绑
         if (mUiLoader.getParent() instanceof ViewGroup) {
@@ -120,8 +120,8 @@ public class ArticleHtmlFragment extends BaseFragment implements IHtmlViewCallba
     public void onRetryClick() {
         //表示网络不佳的时候，用户点击了重试
         //重新获取数据即可
-        if (mHtmlPresenter != null) {
-            mHtmlPresenter.getHtmlArticle();
+        if (mArticleHtmlPresenter != null) {
+            mArticleHtmlPresenter.getHtmlArticle();
         }
     }
 
@@ -137,9 +137,9 @@ public class ArticleHtmlFragment extends BaseFragment implements IHtmlViewCallba
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mHtmlPresenter != null) {
+        if (mArticleHtmlPresenter != null) {
             //取消接口的注册
-            mHtmlPresenter.unRegisterViewCallback(this);
+            mArticleHtmlPresenter.unRegisterViewCallback(this);
         }
     }
 }

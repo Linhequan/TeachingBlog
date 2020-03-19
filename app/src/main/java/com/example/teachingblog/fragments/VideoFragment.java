@@ -28,7 +28,6 @@ public class VideoFragment extends BaseFragment {
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
-        // TODO: 2020/2/18 0018 Video分类的指示器已经完成，下次修改自适应字数太多问题
         View view = layoutInflater.inflate(R.layout.fragment_video, container, false);
         //初始化指示器
         initMagicIndicator(container, view);

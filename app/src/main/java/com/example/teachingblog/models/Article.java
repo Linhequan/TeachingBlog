@@ -1,11 +1,9 @@
 package com.example.teachingblog.models;
 
-import com.example.teachingblog.R;
-import com.example.teachingblog.utils.Constants;
+import com.google.gson.Gson;
 import com.stx.xhb.xbanner.entity.SimpleBannerInfo;
 
 public class Article extends SimpleBannerInfo {
-
     /**
      * id : 3
      * title : CSS实现垂直居中的常用方法
@@ -15,6 +13,9 @@ public class Article extends SimpleBannerInfo {
      * addtime : 2019-09-01T04:35:56.000Z
      * type : CSS
      * author : 林三心
+     * img_path : http://47.100.137.31/img/css2.png
+     * md_path : /uploads/articles/20200307/aeea811b8529441894c27be7398d1ab4.md
+     * is_delete : 0
      */
 
     private int id;
@@ -23,10 +24,12 @@ public class Article extends SimpleBannerInfo {
     private String addtime;
     private String type;
     private String author;
+    private String img_path;
+    private String md_path;
+    private int is_delete;
 
     public static Article objectFromData(String str) {
-
-        return new com.google.gson.Gson().fromJson(str, Article.class);
+        return new Gson().fromJson(str, Article.class);
     }
 
     public int getId() {
@@ -77,6 +80,42 @@ public class Article extends SimpleBannerInfo {
         this.author = author;
     }
 
+    public String getImg_path() {
+        return img_path;
+    }
+
+    public void setImg_path(String img_path) {
+        this.img_path = img_path;
+    }
+
+    public String getMd_path() {
+        return md_path;
+    }
+
+    public void setMd_path(String md_path) {
+        this.md_path = md_path;
+    }
+
+    public int getIs_delete() {
+        return is_delete;
+    }
+
+    public void setIs_delete(int is_delete) {
+        this.is_delete = is_delete;
+    }
+
+    //获取加载图片的值
+    @Override
+    public Object getXBannerUrl() {
+        return getImg_path();
+    }
+
+    //获取图片的标题
+    @Override
+    public String getXBannerTitle() {
+        return getTitle();
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -86,39 +125,9 @@ public class Article extends SimpleBannerInfo {
                 ", addtime='" + addtime + '\'' +
                 ", type='" + type + '\'' +
                 ", author='" + author + '\'' +
+                ", img_path='" + img_path + '\'' +
+                ", md_path='" + md_path + '\'' +
+                ", is_delete=" + is_delete +
                 '}';
-    }
-
-    //获取加载图片的值
-    @Override
-    public Object getXBannerUrl() {
-        return getImgByType(getType());
-    }
-
-    //根据对应的类型获取其图片
-    private int getImgByType(String type) {
-        switch (type) {
-            case Constants.ARTICLE_TYPE_HTML:
-                return R.mipmap.html;
-            case Constants.ARTICLE_TYPE_CSS:
-                return R.mipmap.css;
-            case Constants.ARTICLE_TYPE_JAVASCRIPT:
-                return R.mipmap.javascript;
-            case Constants.ARTICLE_TYPE_VUE:
-                return R.mipmap.vue;
-            case Constants.ARTICLE_TYPE_NODEJS:
-                return R.mipmap.nodejs;
-            case Constants.ARTICLE_TYPE_LIFE:
-                return R.mipmap.life;
-            case Constants.ARTICLE_TYPE_BOOK_RECOMMEND:
-                return R.mipmap.book;
-        }
-        return 0;
-    }
-
-    //获取图片的标题
-    @Override
-    public String getXBannerTitle() {
-        return getTitle();
     }
 }

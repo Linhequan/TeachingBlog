@@ -1,7 +1,7 @@
 package com.example.teachingblog.presenters;
 
-import com.example.teachingblog.interfaces.IHtmlPresenter;
-import com.example.teachingblog.interfaces.IHtmlViewCallback;
+import com.example.teachingblog.interfaces.IArticleHtmlPresenter;
+import com.example.teachingblog.interfaces.IArticleHtmlViewCallback;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.network.RequestCenter;
 import com.example.teachingblog.network.exception.OkHttpException;
@@ -11,26 +11,26 @@ import com.example.teachingblog.utils.LogUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HtmlPresenter implements IHtmlPresenter {
+public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
 
-    private static final String TAG = "HtmlPresenter";
-    private List<IHtmlViewCallback> mCallbacks = new ArrayList<>();
+    private static final String TAG = "ArticleHtmlPresenter";
+    private List<IArticleHtmlViewCallback> mCallbacks = new ArrayList<>();
 
-    private HtmlPresenter() {
+    private ArticleHtmlPresenter() {
     }
 
-    private static HtmlPresenter sInstance = null;
+    private static ArticleHtmlPresenter sInstance = null;
 
     /**
      * 获取单例对象
      *
      * @return
      */
-    public static HtmlPresenter getInstance() {
+    public static ArticleHtmlPresenter getInstance() {
         if (sInstance == null) {
-            synchronized (HtmlPresenter.class) {
+            synchronized (ArticleHtmlPresenter.class) {
                 if (sInstance == null) {
-                    sInstance = new HtmlPresenter();
+                    sInstance = new ArticleHtmlPresenter();
                 }
             }
         }
@@ -50,7 +50,7 @@ public class HtmlPresenter implements IHtmlPresenter {
                 if (responseObj != null) {
                     List<Article> articleList = (List<Article>) responseObj;
                     LogUtil.d(TAG, "length ===== " + articleList.size());
-                    handlerRecommendResult(articleList);
+                    handlerArticleResult(articleList);
                 }
             }
 
@@ -67,21 +67,21 @@ public class HtmlPresenter implements IHtmlPresenter {
 
     private void handlerError() {
         //通知UI更新网络出错
-        for (IHtmlViewCallback callback : mCallbacks) {
+        for (IArticleHtmlViewCallback callback : mCallbacks) {
             callback.onNetworkError();
         }
     }
 
-    private void handlerRecommendResult(List<Article> articleList) {
+    private void handlerArticleResult(List<Article> articleList) {
         //通知UI更新
         if (articleList != null) {
             if (articleList.size() == 0) {
-                for (IHtmlViewCallback callback : mCallbacks) {
+                for (IArticleHtmlViewCallback callback : mCallbacks) {
                     //回调UI数据为空
                     callback.onEmpty();
                 }
             } else {
-                for (IHtmlViewCallback callback : mCallbacks) {
+                for (IArticleHtmlViewCallback callback : mCallbacks) {
                     //回调UI数据
                     callback.onArticleListLoaded(articleList);
                 }
@@ -90,7 +90,7 @@ public class HtmlPresenter implements IHtmlPresenter {
     }
 
     private void updateLoading() {
-        for (IHtmlViewCallback callback : mCallbacks) {
+        for (IArticleHtmlViewCallback callback : mCallbacks) {
             callback.onLoading();
         }
     }
@@ -106,17 +106,17 @@ public class HtmlPresenter implements IHtmlPresenter {
     }
 
     @Override
-    public void registerViewCallback(IHtmlViewCallback iHtmlViewCallback) {
+    public void registerViewCallback(IArticleHtmlViewCallback iArticleHtmlViewCallback) {
         //防止重复加入
-        if (mCallbacks != null && !mCallbacks.contains(iHtmlViewCallback)) {
-            mCallbacks.add(iHtmlViewCallback);
+        if (mCallbacks != null && !mCallbacks.contains(iArticleHtmlViewCallback)) {
+            mCallbacks.add(iArticleHtmlViewCallback);
         }
     }
 
     @Override
-    public void unRegisterViewCallback(IHtmlViewCallback iHtmlViewCallback) {
+    public void unRegisterViewCallback(IArticleHtmlViewCallback iArticleHtmlViewCallback) {
         if (mCallbacks != null) {
-            mCallbacks.remove(iHtmlViewCallback);
+            mCallbacks.remove(iArticleHtmlViewCallback);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.teachingblog.network;
 
 import com.example.teachingblog.models.Article;
+import com.example.teachingblog.models.Video;
 import com.example.teachingblog.network.listener.DisposeDataHandle;
 import com.example.teachingblog.network.listener.DisposeDataListener;
 import com.example.teachingblog.network.request.CommonRequest;
@@ -18,7 +19,7 @@ public class RequestCenter {
     static class HttpConstants {
 
         public static final String BASE_URL = "http://47.100.137.31:3003";
-
+        //*************************************文章相关Api**************************************************//
         /**
          * 查看所有文章接口
          */
@@ -33,7 +34,11 @@ public class RequestCenter {
          * 查看分类为html的所有文章接口
          */
         public static final String HTML_ARTICLE = BASE_URL + "/article/html";
-
+        //*************************************视频相关Api**************************************************//
+        /**
+         * 查看分类为HTML/CSS的所有视频接口
+         */
+        public static final String HTML_CSS_VIDEO = BASE_URL + "/videos/type/HTMLCSS";
     }
 
     //**************************************请求方式相关************************************************//
@@ -49,6 +54,7 @@ public class RequestCenter {
     }
 
     //**************************************请求文章相关************************************************//
+
     /**
      * 获取首页推荐文章
      *
@@ -81,4 +87,9 @@ public class RequestCenter {
     }
 
     //**************************************请求视频相关************************************************//
+
+    public static void getHtmlCssVideo(DisposeDataListener listener) {
+        getRequestByTypeToken(HttpConstants.HTML_CSS_VIDEO, listener, new TypeToken<List<Video>>() {
+        }.getType());
+    }
 }

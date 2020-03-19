@@ -7,12 +7,12 @@ import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public class RoundRectImageView extends AppCompatImageView {
+public class VideoRoundRectImageView extends AppCompatImageView {
 
-    private float roundRatio = 0.1f;
+    private float roundRatio = 0.045f;
     private Path path;
 
-    public RoundRectImageView(Context context, AttributeSet attrs) {
+    public VideoRoundRectImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

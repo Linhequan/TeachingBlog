@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.teachingblog.R;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.utils.LogUtil;
@@ -37,7 +38,8 @@ public class HtmlArticleListAdapter extends RecyclerView.Adapter<HtmlArticleList
         holder.mArticleTitleTv.setText(article.getTitle());
         holder.mArticleDesTv.setText(article.getBody());
         holder.mArticleTypeTv.setText(article.getType());
-        holder.mArticleCoverImg.setImageResource((int) article.getXBannerUrl());
+
+        Glide.with(holder.itemView.getContext()).load(article.getImg_path()).into(holder.mArticleCoverImg);
 
         String addTimeText = null;
         try {

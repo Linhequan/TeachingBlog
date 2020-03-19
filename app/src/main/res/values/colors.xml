@@ -15,6 +15,10 @@
     <color name="article_title">#969696</color>
     <color name="article_icon">#5C5D62</color>
 
+    <!--video item-->
+    <color name="video_title">#969696</color>
+    <color name="video_icon">#5C5D62</color>
+
     <!--UiLoader-->
     <color name="UiLoaderBg">#1E1E1E</color>
     <color name="uiLoaderTextColor">#969696</color>
@@ -29,6 +33,7 @@
     <color name="detail_title">#969696</color>
     <color name="detail_author">#5C5D62</color>
     <color name="detail_addTime">#5C5D62</color>
+    <color name="detail_font_color">#969696</color>
 
     <!--titleBar-->
     <color name="title_text_color">#5C5D62</color>

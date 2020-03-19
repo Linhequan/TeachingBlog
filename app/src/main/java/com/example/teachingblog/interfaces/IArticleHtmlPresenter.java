@@ -2,7 +2,7 @@ package com.example.teachingblog.interfaces;
 
 import com.example.teachingblog.base.IBasePresenter;
 
-public interface IHtmlPresenter extends IBasePresenter<IHtmlViewCallback> {
+public interface IArticleHtmlPresenter extends IBasePresenter<IArticleHtmlViewCallback> {
 
     /**
      * 获取Html类别的文章

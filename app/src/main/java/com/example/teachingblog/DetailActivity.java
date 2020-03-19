@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +19,9 @@ import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.utils.Utils;
 import com.example.teachingblog.views.UILoader;
 
+import org.sufficientlysecure.htmltextview.HtmlHttpImageGetter;
+import org.sufficientlysecure.htmltextview.HtmlTextView;
+
 import java.text.ParseException;
 
 public class DetailActivity extends BaseActivity implements IArticleDetailViewCallback, UILoader.OnRetryClickListener {
@@ -31,7 +33,7 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
     private TextView mDetailArticleAddTime;
     private FrameLayout mArticleDetailContainer;
     private UILoader mUiLoader;
-    private WebView mWebView;
+    private HtmlTextView mHtmlTextView;
 
     private int mCurrentId = -1;
     private ImageView mTitleBarBackIv;
@@ -42,7 +44,6 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        // TODO: 2020/1/28 0028 titleBar完成，webView样式有空就调整
         //设置透明状态栏
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -101,8 +102,8 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
         mDetailArticleAuthor = articleDetailView.findViewById(R.id.detail_article_author);
         mDetailArticleAddTime = articleDetailView.findViewById(R.id.detail_article_addTime);
 
-        mWebView = articleDetailView.findViewById(R.id.web_view);
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        mHtmlTextView = articleDetailView.findViewById(R.id.html_text);
+//        mHtmlTextView.getSettings().setJavaScriptEnabled(true);
         return articleDetailView;
     }
 
@@ -144,9 +145,11 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
 
 //        String data = Html.fromHtml(result).toString();
         //替换img属性
-        String varjs = "<script type='text/javascript'> \nwindow.onload = function()\n{var $img = document.getElementsByTagName('img');for(var p in  $img){$img[p].style.width = '100%'; $img[p].style.height ='auto'}}</script>";
-        if (mWebView != null) {
-            mWebView.loadDataWithBaseURL(null, varjs + result, "text/html", "UTF-8", null);
+//        String varjs = "<script type='text/javascript'> \nwindow.onload = function()\n{var $img = document.getElementsByTagName('img');for(var p in  $img){$img[p].style.width = '100%'; $img[p].style.height ='auto'}}</script>";
+        result = result.replace("color:#010101", "color:#969696");
+        if (mHtmlTextView != null) {
+//            mHtmlTextView.loadDataWithBaseURL(null, varjs + result, "text/html", "UTF-8", null);
+            mHtmlTextView.setHtml(result, new HtmlHttpImageGetter(mHtmlTextView, null, true));
         }
         if (mUiLoader != null) {
             mUiLoader.updateStatus(UILoader.UIStatus.SUCCESS);
