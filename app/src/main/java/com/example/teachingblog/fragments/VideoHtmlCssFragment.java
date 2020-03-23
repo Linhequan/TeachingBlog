@@ -1,5 +1,6 @@
 package com.example.teachingblog.fragments;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.teachingblog.R;
+import com.example.teachingblog.VideoDetailActivity;
 import com.example.teachingblog.adapters.HtmlCssVideoListAdapter;
 import com.example.teachingblog.base.BaseFragment;
 import com.example.teachingblog.interfaces.IVideoHtmlCssViewCallback;
 import com.example.teachingblog.models.Video;
+import com.example.teachingblog.presenters.VideoDetailPresenter;
 import com.example.teachingblog.presenters.VideoHtmlCssPresenter;
 import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.views.UILoader;
@@ -20,7 +23,7 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
 
-public class VideoHtmlCssFragment extends BaseFragment implements IVideoHtmlCssViewCallback, UILoader.OnRetryClickListener {
+public class VideoHtmlCssFragment extends BaseFragment implements IVideoHtmlCssViewCallback, UILoader.OnRetryClickListener, HtmlCssVideoListAdapter.OnVideoItemClickListener {
 
     private static final String TAG = "VideoHtmlCssFragment";
     private UILoader mUiLoader;
@@ -82,7 +85,7 @@ public class VideoHtmlCssFragment extends BaseFragment implements IVideoHtmlCssV
         mHtmlCssVideoListAdapter = new HtmlCssVideoListAdapter();
         mVideoList.setAdapter(mHtmlCssVideoListAdapter);
 
-        // TODO: 2020/3/6 0006 完成item点击跳转
+        mHtmlCssVideoListAdapter.setOnVideoItemClickListener(this);
 
         return mRootView;
     }
@@ -120,6 +123,15 @@ public class VideoHtmlCssFragment extends BaseFragment implements IVideoHtmlCssV
         if (mVideoHtmlCssPresenter != null) {
             mVideoHtmlCssPresenter.getHtmlCssVideo();
         }
+    }
+
+    @Override
+    public void onItemClick(Video video, List<Video> videoList) {
+        //item被点击了，跳转到详情界面
+        //点击跳转详情页，并传相应的视频
+        VideoDetailPresenter.getInstance().setTargetVideo(video, videoList);
+        Intent intent = new Intent(getContext(), VideoDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override

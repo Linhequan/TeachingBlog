@@ -24,7 +24,7 @@
     <color name="uiLoaderTextColor">#969696</color>
 
     <!--Banner-->
-    <color name="tipTextColor">#969696</color>
+    <color name="tipTextColor">#5C5D62</color>
     <color name="pointNormalColor">#5C5D62</color>
     <color name="pointSelectColor">#9A222C</color>
     
@@ -34,6 +34,11 @@
     <color name="detail_author">#5C5D62</color>
     <color name="detail_addTime">#5C5D62</color>
     <color name="detail_font_color">#969696</color>
+    
+    <!--Video detail-->
+    <color name="video_detailBg">#1E1E1E</color>
+    <color name="video_detail_mainBg">#2C2C2C</color>
+    <color name="video_detail_title">#969696</color>
 
     <!--titleBar-->
     <color name="title_text_color">#5C5D62</color>

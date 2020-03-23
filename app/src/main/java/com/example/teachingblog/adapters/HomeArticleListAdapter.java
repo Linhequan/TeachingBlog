@@ -1,6 +1,5 @@
 package com.example.teachingblog.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.teachingblog.R;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.utils.LogUtil;
@@ -122,11 +122,19 @@ public class HomeArticleListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
                     Article article = (Article) model;
-                    Glide.with(((HeaderViewHolder) holder).itemView.getContext()).load(article.getImg_path()).into((ImageView) view);
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions.placeholder(R.mipmap.default_image);
+                    requestOptions.error(R.mipmap.default_image);
+                    requestOptions.transform(new RoundedCorners(20));
+                    Glide.with(((HeaderViewHolder) holder).itemView.getContext())
+                            .load(article.getImg_path())
+                            .apply(requestOptions)
+                            .into((ImageView) view);
                 }
             });
             //刷新数据之后，需要重新设置是否支持自动轮播
             ((HeaderViewHolder) holder).mArticleBanner.setAutoPlayAble(mBannerDatas.size() > 1);
+            ((HeaderViewHolder) holder).mArticleBanner.setIsClipChildrenMode(true);
             ((HeaderViewHolder) holder).mArticleBanner.setBannerData(mBannerDatas);
         } else if (holder instanceof ContentViewHolder) {
             //设置数据

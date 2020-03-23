@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.teachingblog.DetailActivity;
+import com.example.teachingblog.ArticleDetailActivity;
 import com.example.teachingblog.R;
 import com.example.teachingblog.adapters.HtmlArticleListAdapter;
 import com.example.teachingblog.base.BaseFragment;
@@ -130,7 +130,7 @@ public class ArticleHtmlFragment extends BaseFragment implements IArticleHtmlVie
         //item被点击了，跳转到详情界面
         //点击跳转详情页，并传相应的文章
         ArticleDetailPresenter.getInstance().setTargetArticle(article);
-        Intent intent = new Intent(getContext(), DetailActivity.class);
+        Intent intent = new Intent(getContext(), ArticleDetailActivity.class);
         startActivity(intent);
     }
 

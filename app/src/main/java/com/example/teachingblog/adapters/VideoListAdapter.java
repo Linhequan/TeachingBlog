@@ -18,27 +18,26 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HtmlCssVideoListAdapter extends RecyclerView.Adapter<HtmlCssVideoListAdapter.InnerHolder> {
+public class VideoListAdapter extends RecyclerView.Adapter<VideoListAdapter.InnerHolder> {
 
-    private static final String TAG = "HtmlCssVideoListAdapter";
-    //视频列表的内容
+    private static final String TAG = "VideoListAdapter";
     private List<Video> mDatas = new ArrayList<>();
-    private OnVideoItemClickListener mVideoItemClickListener = null;
+    private OnDetailVideoItemClickListener mDtailVideoItemClickListener = null;
 
     @Override
-    public HtmlCssVideoListAdapter.InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, parent, false);
+    public VideoListAdapter.InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_video, parent, false);
         return new InnerHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(HtmlCssVideoListAdapter.InnerHolder holder, final int position) {
+    public void onBindViewHolder(VideoListAdapter.InnerHolder holder, int position) {
         //设置数据
         Video video = mDatas.get(position);
 
-        holder.mVideoTitleTv.setText(video.getTitle());
-        holder.mVideoAuthorTv.setText(video.getAuthor());
-        holder.mVideoTypeTv.setText(video.getType());
+        holder.mDetailVideoTitleTv.setText(video.getTitle());
+        holder.mDetailVideoAuthorTv.setText(video.getAuthor());
+        holder.mDetailVideoTypeTv.setText(video.getType());
 
         String addTimeText = null;
         try {
@@ -47,7 +46,7 @@ public class HtmlCssVideoListAdapter extends RecyclerView.Adapter<HtmlCssVideoLi
             LogUtil.d(TAG, "ParseException --- > " + e.toString());
         }
         if (addTimeText != null) {
-            holder.mVideoAddTimeTv.setText(addTimeText);
+            holder.mDetailVideoAddTimeTv.setText(addTimeText);
         }
 
         RequestOptions requestOptions = new RequestOptions();
@@ -56,13 +55,13 @@ public class HtmlCssVideoListAdapter extends RecyclerView.Adapter<HtmlCssVideoLi
         Glide.with(holder.itemView.getContext())
                 .load(video.getImgsrc())
                 .apply(requestOptions)
-                .into(holder.mVideoCoverImg);
+                .into(holder.mDetailVideoCoverImg);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mVideoItemClickListener != null) {
-                    mVideoItemClickListener.onItemClick(mDatas.get(position), mDatas);
+                if (mDtailVideoItemClickListener != null) {
+                    mDtailVideoItemClickListener.onItemClick(mDatas.get(position), mDatas);
                 }
             }
         });
@@ -75,26 +74,25 @@ public class HtmlCssVideoListAdapter extends RecyclerView.Adapter<HtmlCssVideoLi
 
     public class InnerHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mVideoTitleTv;
-        private final TextView mVideoAuthorTv;
-        private final TextView mVideoTypeTv;
-        private final TextView mVideoAddTimeTv;
-        private final ImageView mVideoCoverImg;
+        private final TextView mDetailVideoTitleTv;
+        private final TextView mDetailVideoAuthorTv;
+        private final TextView mDetailVideoTypeTv;
+        private final TextView mDetailVideoAddTimeTv;
+        private final ImageView mDetailVideoCoverImg;
 
         public InnerHolder(View itemView) {
             super(itemView);
 
             //视频标题
-            mVideoTitleTv = itemView.findViewById(R.id.video_title_tv);
+            mDetailVideoTitleTv = itemView.findViewById(R.id.detail_video_title_tv);
             //视频作者
-            mVideoAuthorTv = itemView.findViewById(R.id.video_author_tv);
+            mDetailVideoAuthorTv = itemView.findViewById(R.id.detail_video_author_tv);
             //视频类型
-            mVideoTypeTv = itemView.findViewById(R.id.video_type_tv);
+            mDetailVideoTypeTv = itemView.findViewById(R.id.detail_video_type_tv);
             //上传时间
-            mVideoAddTimeTv = itemView.findViewById(R.id.video_add_time_tv);
+            mDetailVideoAddTimeTv = itemView.findViewById(R.id.detail_video_add_time_tv);
             //视频图片
-            mVideoCoverImg = itemView.findViewById(R.id.video_cover);
-
+            mDetailVideoCoverImg = itemView.findViewById(R.id.detail_video_cover);
         }
     }
 
@@ -107,11 +105,11 @@ public class HtmlCssVideoListAdapter extends RecyclerView.Adapter<HtmlCssVideoLi
         notifyDataSetChanged();
     }
 
-    public void setOnVideoItemClickListener(OnVideoItemClickListener listener) {
-        this.mVideoItemClickListener = listener;
+    public void setOnDetailVideoItemClickListener(OnDetailVideoItemClickListener listener) {
+        this.mDtailVideoItemClickListener = listener;
     }
 
-    public interface OnVideoItemClickListener {
+    public interface OnDetailVideoItemClickListener {
         void onItemClick(Video video, List<Video> videoList);
     }
 

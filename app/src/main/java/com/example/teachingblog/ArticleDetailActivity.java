@@ -24,9 +24,9 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import java.text.ParseException;
 
-public class DetailActivity extends BaseActivity implements IArticleDetailViewCallback, UILoader.OnRetryClickListener {
+public class ArticleDetailActivity extends BaseActivity implements IArticleDetailViewCallback, UILoader.OnRetryClickListener {
 
-    private static final String TAG = "DetailActivity";
+    private static final String TAG = "ArticleDetailActivity";
     private ArticleDetailPresenter mArticleDetailPresenter;
     private TextView mDetailArticleTitle;
     private TextView mDetailArticleAuthor;
@@ -43,9 +43,9 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_article_detail);
         //设置透明状态栏
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         initView();
@@ -71,7 +71,7 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
             @Override
             public void onClick(View v) {
                 // TODO: 2020/2/13 0013 更多pupWindow
-                Toast.makeText(DetailActivity.this, "点击更多", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ArticleDetailActivity.this, "点击更多", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -173,20 +173,20 @@ public class DetailActivity extends BaseActivity implements IArticleDetailViewCa
     }
 
     @Override
+    public void onRetryClick() {
+        //表示网络不佳的时候，用户点击了重试
+        if (mArticleDetailPresenter != null) {
+            mArticleDetailPresenter.getArticleDetail(mCurrentId);
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         //释放资源
         if (mArticleDetailPresenter != null) {
             mArticleDetailPresenter.unRegisterViewCallback(this);
             mArticleDetailPresenter = null;
-        }
-    }
-
-    @Override
-    public void onRetryClick() {
-        //表示网络不佳的时候，用户点击了重试
-        if (mArticleDetailPresenter != null) {
-            mArticleDetailPresenter.getArticleDetail(mCurrentId);
         }
     }
 }
