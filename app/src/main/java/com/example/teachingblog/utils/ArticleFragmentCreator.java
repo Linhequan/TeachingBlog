@@ -1,14 +1,14 @@
 package com.example.teachingblog.utils;
 
 import com.example.teachingblog.base.BaseFragment;
-import com.example.teachingblog.fragments.ArticleHtmlFragment;
-import com.example.teachingblog.fragments.ArticleCssFragment;
-import com.example.teachingblog.fragments.ArticleJavaScriptFragment;
-import com.example.teachingblog.fragments.ArticleLifeFragment;
-import com.example.teachingblog.fragments.ArticleLinuxFragment;
-import com.example.teachingblog.fragments.ArticleNodeFragment;
-import com.example.teachingblog.fragments.ArticlePHPFragment;
-import com.example.teachingblog.fragments.ArticleVueFragment;
+import com.example.teachingblog.ui.fragments.ArticleHtmlFragment;
+import com.example.teachingblog.ui.fragments.ArticleCssFragment;
+import com.example.teachingblog.ui.fragments.ArticleJavaScriptFragment;
+import com.example.teachingblog.ui.fragments.ArticleLifeFragment;
+import com.example.teachingblog.ui.fragments.ArticleLinuxFragment;
+import com.example.teachingblog.ui.fragments.ArticleNodeFragment;
+import com.example.teachingblog.ui.fragments.ArticlePHPFragment;
+import com.example.teachingblog.ui.fragments.ArticleVueFragment;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,18 +1,16 @@
 package com.example.teachingblog.utils;
 
 public class Constants {
-    //HTML
-    public static final String ARTICLE_TYPE_HTML = "HTML";
-    //CSS
-    public static final String ARTICLE_TYPE_CSS  = "CSS";
-    //JavaScript
-    public static final String ARTICLE_TYPE_JAVASCRIPT = "JavaScript";
-    //Vue
-    public static final String ARTICLE_TYPE_VUE = "Vue";
-    //Nodejs
-    public static final String ARTICLE_TYPE_NODEJS = "Nodejs";
-    //生活趣事
-    public static final String ARTICLE_TYPE_LIFE = "生活趣事";
-    //书籍推荐
-    public static final String ARTICLE_TYPE_BOOK_RECOMMEND = "书籍推荐";
+    //首页分页每页的大小
+    public static final int HOME_COUNT = 10;
+    //分类页分页每页的大小
+    public static final int CLASSIFICATION_COUNT = 5;
+
+    //加载类型
+    //上拉加载更多
+    public static final int LOADER_MORE = 0;
+    //下拉刷新
+    public static final int REFRESH_MORE = 1;
+    //普通加载
+    public static final int NORMAL = 2;
 }

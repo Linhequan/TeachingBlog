@@ -7,14 +7,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:scrollbarThumbVertical="@drawable/shape_scrollbar_style">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
             android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="15dp">
 
             <TextView
                 android:id="@+id/detail_article_title"
@@ -49,13 +50,12 @@
 
             </LinearLayout>
 
-            <org.sufficientlysecure.htmltextview.HtmlTextView
-                android:id="@+id/html_text"
+            <TextView
+                android:id="@+id/rich_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:textAppearance="@android:style/TextAppearance.Small"
                 android:textColor="@color/detail_font_color" />
         </LinearLayout>
 

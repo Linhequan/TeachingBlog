@@ -15,7 +15,7 @@ import okhttp3.RequestBody;
  */
 public class CommonRequest {
     /**
-     * create the key-value Request
+     * 只有url和请求参数，没有请求头的Post请求
      *
      * @param url
      * @param params
@@ -24,7 +24,6 @@ public class CommonRequest {
     public static Request createPostRequest(String url, RequestParams params) {
         return createPostRequest(url, params, null);
     }
-
     /**
      * 可以带请求头的Post请求
      *
@@ -67,7 +66,7 @@ public class CommonRequest {
     }
 
     /**
-     * ressemble the params to the url
+     * 只有url和请求参数，没有请求头的get请求
      *
      * @param url
      * @param params

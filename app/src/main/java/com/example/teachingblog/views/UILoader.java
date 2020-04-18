@@ -24,7 +24,6 @@ public abstract class UILoader extends FrameLayout {
 
     public enum UIStatus {
         LOADING, SUCCESS, NETWORK_ERROR, EMPTY, NONE
-
     }
 
     public UILoader(@NonNull Context context) {
@@ -40,6 +39,15 @@ public abstract class UILoader extends FrameLayout {
         init();
     }
 
+    /**
+     * 初始化UI
+     */
+    private void init() {
+        //设置背景颜色
+        this.setBackground(this.getResources().getDrawable(R.color.UiLoaderBg));
+        switchUIByCurrentStatus();
+    }
+
     public void updateStatus(UIStatus status) {
         mCurrentStatus = status;
         //更新UI一定要在主线程上
@@ -49,15 +57,6 @@ public abstract class UILoader extends FrameLayout {
                 switchUIByCurrentStatus();
             }
         });
-    }
-
-    /**
-     * 初始化UI
-     */
-    private void init() {
-        //设置背景颜色
-        this.setBackground(this.getResources().getDrawable(R.color.UiLoaderBg));
-        switchUIByCurrentStatus();
     }
 
     private void switchUIByCurrentStatus() {

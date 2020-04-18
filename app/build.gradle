@@ -45,12 +45,16 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.3.1")
     //Banner
     implementation 'com.github.xiaohaibin:XBanner:1.7.0'
-    //html-textview
-    implementation 'org.sufficientlysecure:html-textview:3.9'
+    //richText
+    implementation 'com.zzhoujay.richtext:richtext:3.0.8'
+    implementation 'com.zzhoujay:html:1.0.2'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     //JZVideo
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
     implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.4'
     implementation 'cn.jzvd:jiaozivideoplayer:7.2.0'
+    //smartrefresh
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
 }

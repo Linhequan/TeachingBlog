@@ -13,19 +13,27 @@
 
         <ImageView
             android:id="@+id/title_bar_back_iv"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="10dp"
             android:src="@mipmap/back" />
 
         <ImageView
             android:id="@+id/title_bar_more_iv"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="15dp"
+            android:paddingBottom="10dp"
             android:layout_marginRight="10dp"
             android:src="@mipmap/more" />
 

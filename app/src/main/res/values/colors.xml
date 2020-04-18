@@ -9,7 +9,7 @@
     <color name="lineBg">#1E1E1E</color>
     <color name="normalTextColor">#5C5D62</color>
     <color name="selectTextColor">#9A222C</color>
-    
+
     <!--article item-->
     <color name="homeBg">#1E1E1E</color>
     <color name="article_title">#969696</color>
@@ -27,14 +27,14 @@
     <color name="tipTextColor">#5C5D62</color>
     <color name="pointNormalColor">#5C5D62</color>
     <color name="pointSelectColor">#9A222C</color>
-    
+
     <!--detail-->
     <color name="detailBg">#1E1E1E</color>
     <color name="detail_title">#969696</color>
     <color name="detail_author">#5C5D62</color>
     <color name="detail_addTime">#5C5D62</color>
     <color name="detail_font_color">#969696</color>
-    
+
     <!--Video detail-->
     <color name="video_detailBg">#1E1E1E</color>
     <color name="video_detail_mainBg">#2C2C2C</color>
@@ -46,5 +46,8 @@
 
     <!--MagicIndicator-->
     <color name="MagicIndicatorBg">#2C2C2C</color>
+
+    <!--scrollbarThumbVertical-->
+    <color name="scrollbarVertical">#969696</color>
 
 </resources>

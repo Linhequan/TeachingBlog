@@ -1,10 +1,10 @@
 package com.example.teachingblog.utils;
 
 import com.example.teachingblog.base.BaseFragment;
-import com.example.teachingblog.fragments.VideoHtmlCssFragment;
-import com.example.teachingblog.fragments.VideoJavaScriptFragment;
-import com.example.teachingblog.fragments.VideoNodeFragment;
-import com.example.teachingblog.fragments.VideoVueFragment;
+import com.example.teachingblog.ui.fragments.VideoHtmlCssFragment;
+import com.example.teachingblog.ui.fragments.VideoJavaScriptFragment;
+import com.example.teachingblog.ui.fragments.VideoNodeFragment;
+import com.example.teachingblog.ui.fragments.VideoVueFragment;
 
 import java.util.HashMap;
 import java.util.Map;
