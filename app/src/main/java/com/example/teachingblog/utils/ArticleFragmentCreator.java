@@ -3,7 +3,7 @@ package com.example.teachingblog.utils;
 import com.example.teachingblog.base.BaseFragment;
 import com.example.teachingblog.ui.fragments.ArticleHtmlFragment;
 import com.example.teachingblog.ui.fragments.ArticleCssFragment;
-import com.example.teachingblog.ui.fragments.ArticleJavaScriptFragment;
+import com.example.teachingblog.ui.fragments.ArticleJavascriptFragment;
 import com.example.teachingblog.ui.fragments.ArticleLifeFragment;
 import com.example.teachingblog.ui.fragments.ArticleLinuxFragment;
 import com.example.teachingblog.ui.fragments.ArticleNodeFragment;
@@ -42,7 +42,7 @@ public class ArticleFragmentCreator {
                 baseFragment = new ArticleCssFragment();
                 break;
             case INDEX_JAVASCRIPT:
-                baseFragment = new ArticleJavaScriptFragment();
+                baseFragment = new ArticleJavascriptFragment();
                 break;
             case INDEX_VUE:
                 baseFragment = new ArticleVueFragment();

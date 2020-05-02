@@ -12,16 +12,13 @@ import android.widget.Toast;
 
 import com.example.teachingblog.R;
 import com.example.teachingblog.base.BaseFragment;
-import com.example.teachingblog.interfaces.IArticlePHPViewCallback;
+import com.example.teachingblog.interfaces.IArticleJavascriptViewCallback;
 import com.example.teachingblog.models.Article;
-import com.example.teachingblog.models.Articles;
-import com.example.teachingblog.network.RequestCenter;
-import com.example.teachingblog.network.listener.DisposeDataListener;
 import com.example.teachingblog.presenters.ArticleDetailPresenter;
-import com.example.teachingblog.presenters.ArticlePHPPresenter;
+import com.example.teachingblog.presenters.ArticleJavascriptPresenter;
 import com.example.teachingblog.ui.activities.ArticleDetailActivity;
 import com.example.teachingblog.ui.adapters.HtmlArticleListAdapter;
-import com.example.teachingblog.ui.adapters.PHPArticleListAdapter;
+import com.example.teachingblog.ui.adapters.JavascriptArticleListAdapter;
 import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.views.UILoader;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -32,21 +29,17 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
+public class ArticleJavascriptFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, JavascriptArticleListAdapter.OnArticleItemClickListener, IArticleJavascriptViewCallback, UILoader.OnRetryClickListener {
 
-public class ArticlePHPFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, PHPArticleListAdapter.OnArticleItemClickListener, IArticlePHPViewCallback, UILoader.OnRetryClickListener {
-
-    private static final String TAG = "ArticlePHPFragment";
+    private static final String TAG = "ArticleJavascriptFragme";
     private UILoader mUiLoader;
     private View mRootView;
     private RefreshLayout mRefreshLayout;
     private MaterialHeader mMaterialHeader;
     private RecyclerView mArticleList;
-    private PHPArticleListAdapter mPhpArticleListAdapter;
-    private ArticlePHPPresenter mArticlePHPPresenter;
+    private JavascriptArticleListAdapter mJavascriptArticleListAdapter;
+    private ArticleJavascriptPresenter mArticleJavascriptPresenter;
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
@@ -60,11 +53,11 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
         };
 
         //获取到逻辑层的对象
-        mArticlePHPPresenter = ArticlePHPPresenter.getInstance();
+        mArticleJavascriptPresenter = ArticleJavascriptPresenter.getInstance();
         //先要设置通知接口的注册
-        mArticlePHPPresenter.registerViewCallback(this);
-        //获取分类为php的所有文章
-        mArticlePHPPresenter.getPHPArticle();
+        mArticleJavascriptPresenter.registerViewCallback(this);
+        //获取分类为Javascript的所有文章
+        mArticleJavascriptPresenter.getJavascriptArticle();
 
         //与它的父类解绑
         if (mUiLoader.getParent() instanceof ViewGroup) {
@@ -78,10 +71,10 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     }
 
     private View createSuccessView(LayoutInflater layoutInflater, ViewGroup container) {
-        mRootView = layoutInflater.inflate(R.layout.fragment_php_article, container, false);
+        mRootView = layoutInflater.inflate(R.layout.fragment_javascript_article, container, false);
 
         //上拉和下拉刷新框架
-        mRefreshLayout = mRootView.findViewById(R.id.php_article_refreshLayout);
+        mRefreshLayout = mRootView.findViewById(R.id.javascript_article_refreshLayout);
         //Header
         mMaterialHeader = (MaterialHeader) mRefreshLayout.getRefreshHeader();
         //设置Header箭头颜色
@@ -94,7 +87,7 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
 
         //RecyclerView的使用步骤
         //1、找到控件
-        mArticleList = mRootView.findViewById(R.id.php_article_list);
+        mArticleList = mRootView.findViewById(R.id.javascript_article_list);
         //2、设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -111,10 +104,10 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
             }
         });
         //3、设置适配器
-        mPhpArticleListAdapter = new PHPArticleListAdapter();
-        mArticleList.setAdapter(mPhpArticleListAdapter);
+        mJavascriptArticleListAdapter = new JavascriptArticleListAdapter();
+        mArticleList.setAdapter(mJavascriptArticleListAdapter);
 
-        mPhpArticleListAdapter.setOnArticleItemClickListener(this);
+        mJavascriptArticleListAdapter.setOnArticleItemClickListener(this);
 
         return mRootView;
     }
@@ -123,8 +116,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     public void onArticleListLoaded(List<Article> result, boolean noMoreData) {
         //当我们获取到内容的时候，这个方法就会被调用（成功了）
         //数据回来以后，就是更新UI了
-        if (mPhpArticleListAdapter != null) {
-            mPhpArticleListAdapter.setData(result);
+        if (mJavascriptArticleListAdapter != null) {
+            mJavascriptArticleListAdapter.setData(result);
         }
         if (noMoreData) {
             //没有更多数据（上拉加载功能将显示没有更多数据）
@@ -155,8 +148,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     public void onLoaderMoreSuccess(List<Article> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsLoaderMore && mRefreshLayout != null && mPhpArticleListAdapter != null) {
-            mPhpArticleListAdapter.setData(result);
+        if (mIsLoaderMore && mRefreshLayout != null && mJavascriptArticleListAdapter != null) {
+            mJavascriptArticleListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（上拉加载功能将显示没有更多数据）
                 mRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -182,8 +175,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     public void onRefreshSuccess(List<Article> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsRefresh && mRefreshLayout != null && mPhpArticleListAdapter != null) {
-            mPhpArticleListAdapter.setData(result);
+        if (mIsRefresh && mRefreshLayout != null && mJavascriptArticleListAdapter != null) {
+            mJavascriptArticleListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（下拉刷新功能将显示没有更多数据）
                 Toast.makeText(getContext(), "数据全部加载完毕", Toast.LENGTH_SHORT).show();
@@ -217,8 +210,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         //下拉刷新
-        if (mArticlePHPPresenter != null && !mIsRefresh) {
-            mArticlePHPPresenter.pull2RefreshMore();
+        if (mArticleJavascriptPresenter != null && !mIsRefresh) {
+            mArticleJavascriptPresenter.pull2RefreshMore();
             mIsRefresh = true;
         }
     }
@@ -227,8 +220,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         //上拉加载更多
-        if (mArticlePHPPresenter != null && !mIsLoaderMore) {
-            mArticlePHPPresenter.loadMore();
+        if (mArticleJavascriptPresenter != null && !mIsLoaderMore) {
+            mArticleJavascriptPresenter.loadMore();
             mIsLoaderMore = true;
         }
     }
@@ -237,8 +230,8 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     public void onRetryClick() {
         //表示网络不佳的时候，用户点击了重试
         //重新获取数据即可
-        if (mArticlePHPPresenter != null) {
-            mArticlePHPPresenter.getPHPArticle();
+        if (mArticleJavascriptPresenter != null) {
+            mArticleJavascriptPresenter.getJavascriptArticle();
         }
     }
 
@@ -254,9 +247,9 @@ public class ArticlePHPFragment extends BaseFragment implements OnRefreshListene
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mArticlePHPPresenter != null) {
+        if (mArticleJavascriptPresenter != null) {
             //取消接口的注册
-            mArticlePHPPresenter.unRegisterViewCallback(this);
+            mArticleJavascriptPresenter.unRegisterViewCallback(this);
         }
     }
 }

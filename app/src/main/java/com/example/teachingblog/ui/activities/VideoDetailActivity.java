@@ -100,6 +100,7 @@ public class VideoDetailActivity extends BaseActivity implements IVideoDetailVie
 
         //加载视频
         if (mJzvdStd != null) {
+
             mJzvdStd.setUp(video.getVideosrc(), video.getTitle(), JzvdStd.SCREEN_NORMAL, JZMediaIjk.class);
             Glide.with(this).load(video.getImgsrc()).into(mJzvdStd.thumbImageView);
         }
@@ -129,9 +130,18 @@ public class VideoDetailActivity extends BaseActivity implements IVideoDetailVie
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        //home back
+        JzvdStd.goOnPlayOnResume();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
-        Jzvd.releaseAllVideos();
+        //     Jzvd.clearSavedProgress(this, null);
+        //home back
+        JzvdStd.goOnPlayOnPause();
     }
 
     @Override
@@ -158,6 +168,7 @@ public class VideoDetailActivity extends BaseActivity implements IVideoDetailVie
         if (mVideoDetailPresenter != null) {
             mVideoDetailPresenter.unRegisterViewCallback(this);
             mVideoDetailPresenter = null;
+            Jzvd.releaseAllVideos();
         }
     }
 }

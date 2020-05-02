@@ -1,7 +1,7 @@
 package com.example.teachingblog.presenters;
 
-import com.example.teachingblog.interfaces.IArticleHtmlPresenter;
-import com.example.teachingblog.interfaces.IArticleHtmlViewCallback;
+import com.example.teachingblog.interfaces.IArticleLifePresenter;
+import com.example.teachingblog.interfaces.IArticleLifeViewCallback;
 import com.example.teachingblog.models.Article;
 import com.example.teachingblog.network.RequestCenter;
 import com.example.teachingblog.network.exception.OkHttpException;
@@ -13,10 +13,10 @@ import com.example.teachingblog.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
+public class ArticleLifePresenter implements IArticleLifePresenter {
 
-    private static final String TAG = "ArticleHtmlPresenter";
-    private List<IArticleHtmlViewCallback> mCallbacks = new ArrayList<>();
+    private static final String TAG = "ArticleLifePresenter";
+    private List<IArticleLifeViewCallback> mCallbacks = new ArrayList<>();
     private List<Article> mArticles = new ArrayList<>();
 
     //当前页
@@ -24,21 +24,21 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
     //前一次的页数
     private int mPreviousPageIndex = 0;
 
-    private ArticleHtmlPresenter() {
+    private ArticleLifePresenter() {
     }
 
-    private static ArticleHtmlPresenter sInstance = null;
+    private static ArticleLifePresenter sInstance = null;
 
     /**
      * 获取单例对象
      *
      * @return
      */
-    public static ArticleHtmlPresenter getInstance() {
+    public static ArticleLifePresenter getInstance() {
         if (sInstance == null) {
-            synchronized (ArticleHtmlPresenter.class) {
+            synchronized (ArticleLifePresenter.class) {
                 if (sInstance == null) {
-                    sInstance = new ArticleHtmlPresenter();
+                    sInstance = new ArticleLifePresenter();
                 }
             }
         }
@@ -63,10 +63,10 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
     }
 
     /**
-     * 获取分类为html的所有文章
+     * 获取分类为life的所有文章
      */
     @Override
-    public void getHtmlArticle() {
+    public void getLifeArticle() {
         mArticles.clear();
         this.mCurrentPageIndex = 1;
         //通知UI更新正在加载
@@ -75,8 +75,8 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
     }
 
     private void doLoaded(int loadType) {
-        //获取分类为html的所有文章
-        RequestCenter.getHtmlArticle(new DisposeDataListener() {
+        //获取分类为life的所有文章
+        RequestCenter.getLifeArticle(new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 if (responseObj != null) {
@@ -145,7 +145,7 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
     private void handlerRefreshMore(boolean noMoreData) {
         //通知UI更新
         if (mArticles != null) {
-            for (IArticleHtmlViewCallback callback : mCallbacks) {
+            for (IArticleLifeViewCallback callback : mCallbacks) {
                 callback.onRefreshSuccess(mArticles, noMoreData);
             }
         }
@@ -155,7 +155,7 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
      * 处理下拉刷新失败
      */
     private void handlerRefreshMoreError() {
-        for (IArticleHtmlViewCallback callback : mCallbacks) {
+        for (IArticleLifeViewCallback callback : mCallbacks) {
             callback.onRefreshFailure();
         }
     }
@@ -168,7 +168,7 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
     private void handlerLoaderMoreResult(boolean noMoreData) {
         //通知UI更新
         if (mArticles != null) {
-            for (IArticleHtmlViewCallback callback : mCallbacks) {
+            for (IArticleLifeViewCallback callback : mCallbacks) {
                 callback.onLoaderMoreSuccess(mArticles, noMoreData);
             }
         }
@@ -178,13 +178,13 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
      * 处理上拉加载更多失败
      */
     private void handlerLoaderMoreError() {
-        for (IArticleHtmlViewCallback callback : mCallbacks) {
+        for (IArticleLifeViewCallback callback : mCallbacks) {
             callback.onLoaderMoreFailure();
         }
     }
 
     /**
-     * 处理加载html分类文章数据的结果
+     * 处理加载life分类文章数据的结果
      *
      * @param noMoreData 是否有更多数据
      */
@@ -192,12 +192,12 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
         //通知UI更新
         if (mArticles != null) {
             if (mArticles.size() == 0) {
-                for (IArticleHtmlViewCallback callback : mCallbacks) {
+                for (IArticleLifeViewCallback callback : mCallbacks) {
                     //回调UI数据为空
                     callback.onEmpty();
                 }
             } else {
-                for (IArticleHtmlViewCallback callback : mCallbacks) {
+                for (IArticleLifeViewCallback callback : mCallbacks) {
                     //回调UI数据
                     callback.onArticleListLoaded(mArticles, noMoreData);
                 }
@@ -207,30 +207,29 @@ public class ArticleHtmlPresenter implements IArticleHtmlPresenter {
 
     private void handlerError() {
         //通知UI更新网络出错
-        for (IArticleHtmlViewCallback callback : mCallbacks) {
+        for (IArticleLifeViewCallback callback : mCallbacks) {
             callback.onNetworkError();
         }
     }
 
     private void updateLoading() {
-        for (IArticleHtmlViewCallback callback : mCallbacks) {
+        for (IArticleLifeViewCallback callback : mCallbacks) {
             callback.onLoading();
         }
     }
 
-
     @Override
-    public void registerViewCallback(IArticleHtmlViewCallback iArticleHtmlViewCallback) {
+    public void registerViewCallback(IArticleLifeViewCallback iArticleLifeViewCallback) {
         //防止重复加入
-        if (mCallbacks != null && !mCallbacks.contains(iArticleHtmlViewCallback)) {
-            mCallbacks.add(iArticleHtmlViewCallback);
+        if (mCallbacks != null && !mCallbacks.contains(iArticleLifeViewCallback)) {
+            mCallbacks.add(iArticleLifeViewCallback);
         }
     }
 
     @Override
-    public void unRegisterViewCallback(IArticleHtmlViewCallback iArticleHtmlViewCallback) {
+    public void unRegisterViewCallback(IArticleLifeViewCallback iArticleLifeViewCallback) {
         if (mCallbacks != null) {
-            mCallbacks.remove(iArticleHtmlViewCallback);
+            mCallbacks.remove(iArticleLifeViewCallback);
         }
     }
 }

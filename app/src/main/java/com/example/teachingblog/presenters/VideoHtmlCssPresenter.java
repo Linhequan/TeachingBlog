@@ -82,7 +82,7 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
                     List<Video> videoList = (List<Video>) responseObj;
                     LogUtil.d(TAG, "length ===== " + videoList.size());
                     //对该List进行分页
-                    List<Video> videos = Utils.getVideoListPage(mCurrentPageIndex, Constants.CLASSIFICATION_COUNT, videoList);
+                    List<Video> videos = Utils.getVideoListPage(mCurrentPageIndex, Constants.VIDEO_CLASSIFICATION_COUNT, videoList);
                     LogUtil.d(TAG, "videos length --- > " + videos.size());
                     switch (loadType) {
                         case Constants.LOADER_MORE:
@@ -92,7 +92,7 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
                                 mCurrentPageIndex--;
                                 handlerLoaderMoreResult(true);
                             } else {
-                                handlerLoaderMoreResult(videos.size() < Constants.CLASSIFICATION_COUNT);
+                                handlerLoaderMoreResult(videos.size() < Constants.VIDEO_CLASSIFICATION_COUNT);
                             }
                             break;
                         case Constants.REFRESH_MORE:
@@ -100,12 +100,12 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
                             //先清空
                             mVideos.clear();
                             mVideos.addAll(videos);
-                            handlerRefreshMore(videos.size() < Constants.CLASSIFICATION_COUNT);
+                            handlerRefreshMore(videos.size() < Constants.VIDEO_CLASSIFICATION_COUNT);
                             break;
                         case Constants.NORMAL:
                             //普通加载
                             mVideos.addAll(videos);
-                            handlerVideoResult(videos.size() < Constants.CLASSIFICATION_COUNT);
+                            handlerVideoResult(videos.size() < Constants.VIDEO_CLASSIFICATION_COUNT);
                             break;
                     }
                 }

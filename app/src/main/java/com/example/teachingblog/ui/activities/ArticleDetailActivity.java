@@ -2,6 +2,7 @@ package com.example.teachingblog.ui.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -168,21 +169,28 @@ public class ArticleDetailActivity extends BaseActivity implements IArticleDetai
         //替换img属性
 //        String varjs = "<script type='text/javascript'> \nwindow.onload = function()\n{var $img = document.getElementsByTagName('img');for(var p in  $img){$img[p].style.width = '100%'; $img[p].style.height ='auto'}}</script>";
         result = result.replace("color:#010101", "color:#969696");
+        result = result.replace("color:#333333", "color:#969696");
         result = result.replace("color:rgb(51,51,51)", "color:#969696");
+        result = result.replace("color:rgb(0,0,0)", "color:#969696");
         result = result.replace("color:rgb(47,47,47)", "color:#969696");
+        result = result.replace("color:rgba(49,41,41,.81)", "color:#969696");
         if (mRichTv != null) {
             RichText.from(result)
                     .autoFix(true)//是否自动修复，默认true
                     .placeHolder(new DrawableGetter() {
                         @Override
                         public Drawable getDrawable(ImageHolder holder, RichTextConfig config, TextView textView) {
-                            return ArticleDetailActivity.this.getResources().getDrawable(R.mipmap.default_image);
+                            Drawable drawable = ArticleDetailActivity.this.getResources().getDrawable(R.mipmap.default_image);
+                            drawable.setBounds(0, 0, 100, 100);
+                            return drawable;
                         }
                     })//设置加载中显示的占位图
                     .errorImage(new DrawableGetter() {
                         @Override
                         public Drawable getDrawable(ImageHolder holder, RichTextConfig config, TextView textView) {
-                            return ArticleDetailActivity.this.getResources().getDrawable(R.mipmap.default_image);
+                            Drawable drawable = ArticleDetailActivity.this.getResources().getDrawable(R.mipmap.default_image);
+                            drawable.setBounds(0, 0, 100, 100);
+                            return drawable;
                         }
                     })// 设置加载失败的错误图
                     .urlClick(new OnUrlClickListener() {
