@@ -17,8 +17,7 @@ import com.example.teachingblog.models.Video;
 import com.example.teachingblog.presenters.VideoDetailPresenter;
 import com.example.teachingblog.presenters.VideoJavascriptPresenter;
 import com.example.teachingblog.ui.activities.VideoDetailActivity;
-import com.example.teachingblog.ui.adapters.HtmlCssVideoListAdapter;
-import com.example.teachingblog.ui.adapters.JavascriptListAdapter;
+import com.example.teachingblog.ui.adapters.JavascriptVideoListAdapter;
 import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.views.UILoader;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -30,7 +29,7 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
 
-public class VideoJavascriptFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, JavascriptListAdapter.OnVideoItemClickListener, IVideoJavascriptViewCallback, UILoader.OnRetryClickListener {
+public class VideoJavascriptFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, JavascriptVideoListAdapter.OnVideoItemClickListener, IVideoJavascriptViewCallback, UILoader.OnRetryClickListener {
 
     private static final String TAG = "VideoJavascriptFragment";
     private UILoader mUiLoader;
@@ -38,7 +37,7 @@ public class VideoJavascriptFragment extends BaseFragment implements OnRefreshLi
     private RefreshLayout mRefreshLayout;
     private MaterialHeader mMaterialHeader;
     private RecyclerView mVideoList;
-    private JavascriptListAdapter mJavascriptListAdapter;
+    private JavascriptVideoListAdapter mJavascriptVideoListAdapter;
     private VideoJavascriptPresenter mVideoJavascriptPresenter;
 
     @Override
@@ -104,10 +103,10 @@ public class VideoJavascriptFragment extends BaseFragment implements OnRefreshLi
             }
         });
         //3、设置适配器
-        mJavascriptListAdapter = new JavascriptListAdapter();
-        mVideoList.setAdapter(mJavascriptListAdapter);
+        mJavascriptVideoListAdapter = new JavascriptVideoListAdapter();
+        mVideoList.setAdapter(mJavascriptVideoListAdapter);
 
-        mJavascriptListAdapter.setOnVideoItemClickListener(this);
+        mJavascriptVideoListAdapter.setOnVideoItemClickListener(this);
 
         return mRootView;
     }
@@ -116,8 +115,8 @@ public class VideoJavascriptFragment extends BaseFragment implements OnRefreshLi
     public void onVideoListLoaded(List<Video> result, boolean noMoreData) {
         //当我们获取到内容的时候，这个方法就会被调用（成功了）
         //数据回来以后，就是更新UI了
-        if (mJavascriptListAdapter != null) {
-            mJavascriptListAdapter.setData(result);
+        if (mJavascriptVideoListAdapter != null) {
+            mJavascriptVideoListAdapter.setData(result);
         }
         if (noMoreData) {
             //没有更多数据（上拉加载功能将显示没有更多数据）
@@ -148,8 +147,8 @@ public class VideoJavascriptFragment extends BaseFragment implements OnRefreshLi
     public void onLoaderMoreSuccess(List<Video> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsLoaderMore && mRefreshLayout != null && mJavascriptListAdapter != null) {
-            mJavascriptListAdapter.setData(result);
+        if (mIsLoaderMore && mRefreshLayout != null && mJavascriptVideoListAdapter != null) {
+            mJavascriptVideoListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（上拉加载功能将显示没有更多数据）
                 mRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -175,8 +174,8 @@ public class VideoJavascriptFragment extends BaseFragment implements OnRefreshLi
     public void onRefreshSuccess(List<Video> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsRefresh && mRefreshLayout != null && mJavascriptListAdapter != null) {
-            mJavascriptListAdapter.setData(result);
+        if (mIsRefresh && mRefreshLayout != null && mJavascriptVideoListAdapter != null) {
+            mJavascriptVideoListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（下拉刷新功能将显示没有更多数据）
                 Toast.makeText(getContext(), "数据全部加载完毕", Toast.LENGTH_SHORT).show();

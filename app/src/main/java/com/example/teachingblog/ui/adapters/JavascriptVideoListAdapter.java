@@ -18,21 +18,21 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JavascriptListAdapter extends RecyclerView.Adapter<JavascriptListAdapter.InnerHolder> {
+public class JavascriptVideoListAdapter extends RecyclerView.Adapter<JavascriptVideoListAdapter.InnerHolder> {
 
-    private static final String TAG = "JavascriptListAdapter";
+    private static final String TAG = "JavascriptVideoListAdapter";
     //视频列表的内容
     private List<Video> mDatas = new ArrayList<>();
     private OnVideoItemClickListener mVideoItemClickListener = null;
 
     @Override
-    public JavascriptListAdapter.InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public JavascriptVideoListAdapter.InnerHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, parent, false);
         return new InnerHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(JavascriptListAdapter.InnerHolder holder, int position) {
+    public void onBindViewHolder(JavascriptVideoListAdapter.InnerHolder holder, int position) {
         //设置数据
         Video video = mDatas.get(position);
 
