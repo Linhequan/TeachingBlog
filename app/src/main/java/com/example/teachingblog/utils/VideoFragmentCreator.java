@@ -2,7 +2,7 @@ package com.example.teachingblog.utils;
 
 import com.example.teachingblog.base.BaseFragment;
 import com.example.teachingblog.ui.fragments.VideoHtmlCssFragment;
-import com.example.teachingblog.ui.fragments.VideoJavaScriptFragment;
+import com.example.teachingblog.ui.fragments.VideoJavascriptFragment;
 import com.example.teachingblog.ui.fragments.VideoNodeFragment;
 import com.example.teachingblog.ui.fragments.VideoVueFragment;
 
@@ -28,7 +28,7 @@ public class VideoFragmentCreator {
                 baseFragment = new VideoHtmlCssFragment();
                 break;
             case INDEX_JAVASCRIPT:
-                baseFragment = new VideoJavaScriptFragment();
+                baseFragment = new VideoJavascriptFragment();
                 break;
             case INDEX_VUE:
                 baseFragment = new VideoVueFragment();

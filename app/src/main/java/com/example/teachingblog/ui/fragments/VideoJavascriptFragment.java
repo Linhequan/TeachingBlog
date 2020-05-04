@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import com.example.teachingblog.R;
 import com.example.teachingblog.base.BaseFragment;
-import com.example.teachingblog.interfaces.IVideoNodeViewCallback;
+import com.example.teachingblog.interfaces.IVideoJavascriptViewCallback;
 import com.example.teachingblog.models.Video;
 import com.example.teachingblog.presenters.VideoDetailPresenter;
-import com.example.teachingblog.presenters.VideoNodePresenter;
+import com.example.teachingblog.presenters.VideoJavascriptPresenter;
 import com.example.teachingblog.ui.activities.VideoDetailActivity;
 import com.example.teachingblog.ui.adapters.HtmlCssVideoListAdapter;
-import com.example.teachingblog.ui.adapters.NodeVideoListAdapter;
+import com.example.teachingblog.ui.adapters.JavascriptListAdapter;
 import com.example.teachingblog.utils.LogUtil;
 import com.example.teachingblog.views.UILoader;
 import com.scwang.smartrefresh.header.MaterialHeader;
@@ -30,16 +30,16 @@ import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
 import java.util.List;
 
-public class VideoNodeFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, NodeVideoListAdapter.OnVideoItemClickListener, IVideoNodeViewCallback, UILoader.OnRetryClickListener {
+public class VideoJavascriptFragment extends BaseFragment implements OnRefreshListener, OnLoadMoreListener, JavascriptListAdapter.OnVideoItemClickListener, IVideoJavascriptViewCallback, UILoader.OnRetryClickListener {
 
-    private static final String TAG = "VideoNodeFragment";
+    private static final String TAG = "VideoJavascriptFragment";
     private UILoader mUiLoader;
     private View mRootView;
     private RefreshLayout mRefreshLayout;
     private MaterialHeader mMaterialHeader;
     private RecyclerView mVideoList;
-    private NodeVideoListAdapter mNodeVideoListAdapter;
-    private VideoNodePresenter mVideoNodePresenter;
+    private JavascriptListAdapter mJavascriptListAdapter;
+    private VideoJavascriptPresenter mVideoJavascriptPresenter;
 
     @Override
     protected View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container) {
@@ -53,11 +53,11 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
         };
 
         //获取到逻辑层的对象
-        mVideoNodePresenter = VideoNodePresenter.getInstance();
+        mVideoJavascriptPresenter = VideoJavascriptPresenter.getInstance();
         //先要设置通知接口的注册
-        mVideoNodePresenter.registerViewCallback(this);
-        //获取分类为node的所有视频
-        mVideoNodePresenter.getNodeVideo();
+        mVideoJavascriptPresenter.registerViewCallback(this);
+        //获取分类为Javascript的所有视频
+        mVideoJavascriptPresenter.getJavascriptVideo();
 
         //与它的父类解绑
         if (mUiLoader.getParent() instanceof ViewGroup) {
@@ -71,10 +71,10 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     }
 
     private View createSuccessView(LayoutInflater layoutInflater, ViewGroup container) {
-        mRootView = layoutInflater.inflate(R.layout.fragment_node_video, container, false);
+        mRootView = layoutInflater.inflate(R.layout.fragment_javascript_video, container, false);
 
         //上拉和下拉刷新框架
-        mRefreshLayout = mRootView.findViewById(R.id.node_video_refreshLayout);
+        mRefreshLayout = mRootView.findViewById(R.id.javascript_video_refreshLayout);
         //Header
         mMaterialHeader = (MaterialHeader) mRefreshLayout.getRefreshHeader();
         //设置Header箭头颜色
@@ -87,7 +87,7 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
 
         //RecyclerView的使用步骤
         //1、找到控件
-        mVideoList = mRootView.findViewById(R.id.node_video_list);
+        mVideoList = mRootView.findViewById(R.id.javascript_video_list);
         //2、设置布局管理器
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -104,10 +104,10 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
             }
         });
         //3、设置适配器
-        mNodeVideoListAdapter = new NodeVideoListAdapter();
-        mVideoList.setAdapter(mNodeVideoListAdapter);
+        mJavascriptListAdapter = new JavascriptListAdapter();
+        mVideoList.setAdapter(mJavascriptListAdapter);
 
-        mNodeVideoListAdapter.setOnVideoItemClickListener(this);
+        mJavascriptListAdapter.setOnVideoItemClickListener(this);
 
         return mRootView;
     }
@@ -116,8 +116,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     public void onVideoListLoaded(List<Video> result, boolean noMoreData) {
         //当我们获取到内容的时候，这个方法就会被调用（成功了）
         //数据回来以后，就是更新UI了
-        if (mNodeVideoListAdapter != null) {
-            mNodeVideoListAdapter.setData(result);
+        if (mJavascriptListAdapter != null) {
+            mJavascriptListAdapter.setData(result);
         }
         if (noMoreData) {
             //没有更多数据（上拉加载功能将显示没有更多数据）
@@ -148,8 +148,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     public void onLoaderMoreSuccess(List<Video> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsLoaderMore && mRefreshLayout != null && mNodeVideoListAdapter != null) {
-            mNodeVideoListAdapter.setData(result);
+        if (mIsLoaderMore && mRefreshLayout != null && mJavascriptListAdapter != null) {
+            mJavascriptListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（上拉加载功能将显示没有更多数据）
                 mRefreshLayout.finishLoadMoreWithNoMoreData();
@@ -175,8 +175,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     public void onRefreshSuccess(List<Video> result, boolean noMoreData) {
         //进入这里说明加载数据成功了
         //数据回来以后，就是更新UI了
-        if (mIsRefresh && mRefreshLayout != null && mNodeVideoListAdapter != null) {
-            mNodeVideoListAdapter.setData(result);
+        if (mIsRefresh && mRefreshLayout != null && mJavascriptListAdapter != null) {
+            mJavascriptListAdapter.setData(result);
             if (noMoreData) {
                 //没有更多数据（下拉刷新功能将显示没有更多数据）
                 Toast.makeText(getContext(), "数据全部加载完毕", Toast.LENGTH_SHORT).show();
@@ -210,8 +210,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         //下拉刷新
-        if (mVideoNodePresenter != null && !mIsRefresh) {
-            mVideoNodePresenter.pull2RefreshMore();
+        if (mVideoJavascriptPresenter != null && !mIsRefresh) {
+            mVideoJavascriptPresenter.pull2RefreshMore();
             mIsRefresh = true;
         }
     }
@@ -220,8 +220,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
         //上拉加载更多
-        if (mVideoNodePresenter != null && !mIsLoaderMore) {
-            mVideoNodePresenter.loadMore();
+        if (mVideoJavascriptPresenter != null && !mIsLoaderMore) {
+            mVideoJavascriptPresenter.loadMore();
             mIsLoaderMore = true;
         }
     }
@@ -230,8 +230,8 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     public void onRetryClick() {
         //表示网络不佳的时候，用户点击了重试
         //重新获取数据即可
-        if (mVideoNodePresenter != null) {
-            mVideoNodePresenter.getNodeVideo();
+        if (mVideoJavascriptPresenter != null) {
+            mVideoJavascriptPresenter.getJavascriptVideo();
         }
     }
 
@@ -247,9 +247,9 @@ public class VideoNodeFragment extends BaseFragment implements OnRefreshListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mVideoNodePresenter != null) {
+        if (mVideoJavascriptPresenter != null) {
             //取消接口的注册
-            mVideoNodePresenter.unRegisterViewCallback(this);
+            mVideoJavascriptPresenter.unRegisterViewCallback(this);
         }
     }
 }

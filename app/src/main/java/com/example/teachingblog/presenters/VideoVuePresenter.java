@@ -1,7 +1,7 @@
 package com.example.teachingblog.presenters;
 
-import com.example.teachingblog.interfaces.IVideoHtmlCssPresenter;
-import com.example.teachingblog.interfaces.IVideoHtmlCssViewCallback;
+import com.example.teachingblog.interfaces.IVideoVuePresenter;
+import com.example.teachingblog.interfaces.IVideoVueViewCallback;
 import com.example.teachingblog.models.Video;
 import com.example.teachingblog.network.RequestCenter;
 import com.example.teachingblog.network.exception.OkHttpException;
@@ -13,10 +13,10 @@ import com.example.teachingblog.utils.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
+public class VideoVuePresenter implements IVideoVuePresenter {
 
-    private static final String TAG = "VideoHtmlCssPresenter";
-    private List<IVideoHtmlCssViewCallback> mCallbacks = new ArrayList<>();
+    private static final String TAG = "VideoVuePresenter";
+    private List<IVideoVueViewCallback> mCallbacks = new ArrayList<>();
     private List<Video> mVideos = new ArrayList<>();
 
     //当前页
@@ -24,21 +24,21 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
     //前一次的页数
     private int mPreviousPageIndex = 0;
 
-    private VideoHtmlCssPresenter() {
+    private VideoVuePresenter() {
     }
 
-    private static VideoHtmlCssPresenter sInstance = null;
+    private static VideoVuePresenter sInstance = null;
 
     /**
      * 获取单例对象
      *
      * @return
      */
-    public static VideoHtmlCssPresenter getInstance() {
+    public static VideoVuePresenter getInstance() {
         if (sInstance == null) {
-            synchronized (VideoHtmlCssPresenter.class) {
+            synchronized (VideoVuePresenter.class) {
                 if (sInstance == null) {
-                    sInstance = new VideoHtmlCssPresenter();
+                    sInstance = new VideoVuePresenter();
                 }
             }
         }
@@ -63,10 +63,10 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
     }
 
     /**
-     * 获取分类为html/css的视频
+     * 获取分类为vue的视频
      */
     @Override
-    public void getHtmlCssVideo() {
+    public void getVueVideo() {
         mVideos.clear();
         this.mCurrentPageIndex = 1;
         //通知UI更新正在加载
@@ -75,8 +75,8 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
     }
 
     private void doLoaded(int loadType) {
-        //获取分类为html/css的视频
-        RequestCenter.getHtmlCssVideo(new DisposeDataListener() {
+        //获取分类为vue的视频
+        RequestCenter.getVueVideo(new DisposeDataListener() {
             @Override
             public void onSuccess(Object responseObj) {
                 if (responseObj != null) {
@@ -145,7 +145,7 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
     private void handlerRefreshMore(boolean noMoreData) {
         //通知UI更新
         if (mVideos != null) {
-            for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+            for (IVideoVueViewCallback callback : mCallbacks) {
                 callback.onRefreshSuccess(mVideos, noMoreData);
             }
         }
@@ -155,7 +155,7 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
      * 处理下拉刷新失败
      */
     private void handlerRefreshMoreError() {
-        for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+        for (IVideoVueViewCallback callback : mCallbacks) {
             callback.onRefreshFailure();
         }
     }
@@ -168,7 +168,7 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
     private void handlerLoaderMoreResult(boolean noMoreData) {
         //通知UI更新
         if (mVideos != null) {
-            for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+            for (IVideoVueViewCallback callback : mCallbacks) {
                 callback.onLoaderMoreSuccess(mVideos, noMoreData);
             }
         }
@@ -178,13 +178,13 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
      * 处理上拉加载更多失败
      */
     private void handlerLoaderMoreError() {
-        for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+        for (IVideoVueViewCallback callback : mCallbacks) {
             callback.onLoaderMoreFailure();
         }
     }
 
     /**
-     * 处理加载html/css分类视频数据的结果
+     * 处理加载vue分类视频数据的结果
      *
      * @param noMoreData 是否有更多数据
      */
@@ -192,12 +192,12 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
         //通知UI更新
         if (mVideos != null) {
             if (mVideos.size() == 0) {
-                for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+                for (IVideoVueViewCallback callback : mCallbacks) {
                     //回调UI数据为空
                     callback.onEmpty();
                 }
             } else {
-                for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+                for (IVideoVueViewCallback callback : mCallbacks) {
                     //回调UI数据
                     callback.onVideoListLoaded(mVideos, noMoreData);
                 }
@@ -207,29 +207,29 @@ public class VideoHtmlCssPresenter implements IVideoHtmlCssPresenter {
 
     private void handlerError() {
         //通知UI更新网络出错
-        for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+        for (IVideoVueViewCallback callback : mCallbacks) {
             callback.onNetworkError();
         }
     }
 
     private void updateLoading() {
-        for (IVideoHtmlCssViewCallback callback : mCallbacks) {
+        for (IVideoVueViewCallback callback : mCallbacks) {
             callback.onLoading();
         }
     }
 
     @Override
-    public void registerViewCallback(IVideoHtmlCssViewCallback iVideoHtmlCssViewCallback) {
+    public void registerViewCallback(IVideoVueViewCallback iVideoVueViewCallback) {
         //防止重复加入
-        if (mCallbacks != null && !mCallbacks.contains(iVideoHtmlCssViewCallback)) {
-            mCallbacks.add(iVideoHtmlCssViewCallback);
+        if (mCallbacks != null && !mCallbacks.contains(iVideoVueViewCallback)) {
+            mCallbacks.add(iVideoVueViewCallback);
         }
     }
 
     @Override
-    public void unRegisterViewCallback(IVideoHtmlCssViewCallback iVideoHtmlCssViewCallback) {
+    public void unRegisterViewCallback(IVideoVueViewCallback iVideoVueViewCallback) {
         if (mCallbacks != null) {
-            mCallbacks.remove(iVideoHtmlCssViewCallback);
+            mCallbacks.remove(iVideoVueViewCallback);
         }
     }
 }

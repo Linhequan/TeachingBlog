@@ -67,7 +67,7 @@ public class RequestCenter {
         public static final String LINUX_ARTICLE = "http://47.100.137.31:3001/articles/1/5/linux";
 
         /**
-         * 查看分类为Linux的所有文章接口
+         * 查看分类为life的所有文章接口
          */
         public static final String LIFE_ARTICLE = BASE_URL + "/article/life";
         //*************************************视频相关Api**************************************************//
@@ -75,6 +75,21 @@ public class RequestCenter {
          * 查看分类为HTML/CSS的所有视频接口
          */
         public static final String HTML_CSS_VIDEO = BASE_URL + "/videos/type/HTMLCSS";
+
+        /**
+         * 查看分类为javascript的所有视频接口
+         */
+        public static final String JAVASCRIPT_VIDEO = BASE_URL + "/videos/type/JavaScript";
+
+        /**
+         * 查看分类为vue的所有视频接口
+         */
+        public static final String VUE_VIDEO = BASE_URL + "/videos/type/Vue";
+
+        /**
+         * 查看分类为node的所有视频接口
+         */
+        public static final String NODE_VIDEO = BASE_URL + "/videos/type/Nodejs";
     }
 
     //**************************************请求方式相关************************************************//
@@ -197,8 +212,41 @@ public class RequestCenter {
 
     //**************************************请求视频相关************************************************//
 
+    /**
+     * 获取分类为Html/Css的所有视频
+     * @param listener
+     */
     public static void getHtmlCssVideo(DisposeDataListener listener) {
         getRequestByTypeToken(HttpConstants.HTML_CSS_VIDEO, listener, new TypeToken<List<Video>>() {
+        }.getType());
+    }
+
+    /**
+     * 获取分类为JavaScript的所有视频
+     * @param listener
+     */
+    public static void getJavaScriptVideo(DisposeDataListener listener) {
+        getRequestByTypeToken(HttpConstants.JAVASCRIPT_VIDEO, listener, new TypeToken<List<Video>>() {
+        }.getType());
+    }
+
+    /**
+     * 获取分类为vue的所有视频
+     *
+     * @param listener
+     */
+    public static void getVueVideo(DisposeDataListener listener) {
+        getRequestByTypeToken(HttpConstants.VUE_VIDEO, listener, new TypeToken<List<Video>>() {
+        }.getType());
+    }
+
+    /**
+     * 获取分类为node的所有视频
+     *
+     * @param listener
+     */
+    public static void getNodeVideo(DisposeDataListener listener) {
+        getRequestByTypeToken(HttpConstants.NODE_VIDEO, listener, new TypeToken<List<Video>>() {
         }.getType());
     }
 }

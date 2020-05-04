@@ -4,9 +4,9 @@ import com.example.teachingblog.models.Video;
 
 import java.util.List;
 
-public interface IVideoHtmlCssViewCallback {
+public interface IVideoNodeViewCallback {
     /**
-     * 获取Html/Css视频
+     * 获取node视频
      *
      * @param result
      * @param noMoreData 是否有更多数据
